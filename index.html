@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ignis Divinus - CS 184 Final Project</title>
+    <title>Ignis Divinus - Computer Graphics Final Project</title>
     <style>
         * {
             margin: 0;
@@ -150,26 +150,34 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .proposal-header {
+        .proposal-btn {
             display: inline-block;
             padding: 18px 40px;
             background: linear-gradient(45deg, var(--fire-orange), var(--fire-red));
             color: white;
+            text-decoration: none;
             font-weight: bold;
             font-size: 1.1rem;
             border-radius: 50px;
+            transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 15px;
+        }
+
+        .proposal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+            background: linear-gradient(45deg, var(--fire-red), var(--fire-orange));
         }
 
         .proposal-url {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--fire-yellow);
             font-family: 'Fira Code', monospace;
+            margin-top: 15px;
             background: rgba(255, 255, 255, 0.05);
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 8px;
             display: inline-block;
             user-select: all;
@@ -194,13 +202,12 @@
             flex-wrap: wrap;
         }
 
-        nav a, nav span {
+        nav a {
             color: var(--text-light);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
-            cursor: pointer;
         }
 
         nav a::after {
@@ -216,6 +223,21 @@
 
         nav a:hover::after {
             width: 100%;
+        }
+
+        /* External link indicator */
+        .external-link {
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .external-link::before {
+            content: "↗";
+            position: absolute;
+            right: 0;
+            top: -2px;
+            font-size: 14px;
+            color: var(--fire-orange);
         }
 
         /* Content sections */
@@ -272,7 +294,6 @@
             margin-right: 10px;
         }
 
-        /* Cards */
         .card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 107, 53, 0.2);
@@ -311,6 +332,12 @@
             background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover {
+            background: rgba(255, 107, 53, 0.05);
+            border-color: rgba(255, 107, 53, 0.4);
         }
 
         .link-item-header {
@@ -320,6 +347,12 @@
             color: var(--fire-yellow);
             font-weight: bold;
             margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .link-item a {
+            text-decoration: none;
+            color: inherit;
         }
 
         .link-url {
@@ -369,7 +402,6 @@
             margin-bottom: 10px;
         }
 
-        /* Code blocks */
         code {
             background: rgba(255, 255, 255, 0.1);
             padding: 2px 6px;
@@ -378,7 +410,6 @@
             color: var(--fire-yellow);
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 50px 20px;
@@ -388,20 +419,31 @@
 
         .footer-links {
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
-        .footer-link-item {
-            margin: 10px 0;
+        .footer-links a {
             color: var(--fire-orange);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--fire-yellow);
+            text-decoration: underline;
         }
 
         .footer-url {
+            display: block;
             color: #999;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-family: 'Fira Code', monospace;
+            margin-top: 5px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .title {
                 font-size: 2.5rem;
@@ -447,11 +489,13 @@
             <div class="team-member">Muze Du</div>
             <div class="team-member">Yijun Xiang</div>
         </div>
-        <p class="course-info" id="courseInfo">CS 184 Summer 2025 | UC Berkeley</p>
+        <p class="course-info" id="courseInfo">Computer Graphics Summer 2025 | UC Berkeley</p>
         
         <!-- Proposal Link Container -->
         <div class="proposal-link-container" id="proposalButton">
-            <div class="proposal-header">View Full Proposal Webpage</div>
+            <a href="https://yijun-xiang.github.io/ignis-divinus/" class="proposal-btn" target="_blank">
+                View Full Proposal Webpage
+            </a>
             <div class="proposal-url">https://yijun-xiang.github.io/ignis-divinus/</div>
         </div>
     </header>
@@ -463,7 +507,7 @@
             <li><a href="#goals">Goals</a></li>
             <li><a href="#schedule">Schedule</a></li>
             <li><a href="#resources">Resources</a></li>
-            <li><span style="color: var(--fire-orange);">Full Proposal ↗</span></li>
+            <li><a href="https://yijun-xiang.github.io/ignis-divinus/" class="external-link" target="_blank">Full Proposal</a></li>
         </ul>
     </nav>
 
@@ -474,24 +518,30 @@
                 <h3>🔥 Project Links</h3>
                 <div class="link-grid">
                     <div class="link-item">
-                        <div class="link-item-header">
-                            <span>📄</span>
-                            <span>Full Proposal Webpage</span>
-                        </div>
+                        <a href="https://yijun-xiang.github.io/ignis-divinus/" target="_blank">
+                            <div class="link-item-header">
+                                <span>📄</span>
+                                <span>Full Proposal Webpage</span>
+                            </div>
+                        </a>
                         <div class="link-url">https://yijun-xiang.github.io/ignis-divinus/</div>
                     </div>
                     <div class="link-item">
-                        <div class="link-item-header">
-                            <span>💻</span>
-                            <span>GitHub Repository</span>
-                        </div>
+                        <a href="https://github.com/yijun-xiang/ignis-divinus" target="_blank">
+                            <div class="link-item-header">
+                                <span>💻</span>
+                                <span>GitHub Repository</span>
+                            </div>
+                        </a>
                         <div class="link-url">https://github.com/yijun-xiang/ignis-divinus</div>
                     </div>
                     <div class="link-item">
-                        <div class="link-item-header">
-                            <span>📚</span>
-                            <span>Course Project Page</span>
-                        </div>
+                        <a href="https://cs184.eecs.berkeley.edu/su25/project/" target="_blank">
+                            <div class="link-item-header">
+                                <span>📚</span>
+                                <span>Course Project Page</span>
+                            </div>
+                        </a>
                         <div class="link-url">https://cs184.eecs.berkeley.edu/su25/project/</div>
                     </div>
                     <div class="link-item">
@@ -511,7 +561,8 @@
                 <p>We will build an interactive 3D lighter simulation featuring physically-based volumetric fire rendering with real-time heat haze effects. Using Taichi for GPU acceleration, our system will combine 3D fluid simulation, volumetric ray marching with blackbody radiation coloring, and screen-space refraction to create a cinematic-quality fire effect.</p>
                 <p>The final deliverable will be an interactive demo where users can control various parameters while maintaining real-time performance at 30+ FPS.</p>
                 <p style="margin-top: 20px;">
-                    <strong>📌 Note:</strong> For the complete project proposal with all technical details, please visit our full proposal webpage at:
+                    <strong>📌 Note:</strong> For the complete project proposal with all technical details, please visit our 
+                    <a href="https://yijun-xiang.github.io/ignis-divinus/" style="color: var(--fire-orange); text-decoration: underline;" target="_blank">full proposal webpage</a>:
                     <br>
                     <code style="margin-left: 20px; display: inline-block; margin-top: 10px;">https://yijun-xiang.github.io/ignis-divinus/</code>
                 </p>
@@ -718,23 +769,25 @@
     </main>
 
     <footer>
-        <p>CS 184: Computer Graphics and Imaging | Summer 2025</p>
+        <p>Computer Graphics | Summer 2025</p>
         <p>University of California, Berkeley</p>
         <div class="footer-links">
-            <div class="footer-link-item">
-                <strong>Proposal Webpage:</strong> <span class="footer-url">https://yijun-xiang.github.io/ignis-divinus/</span>
-            </div>
-            <div class="footer-link-item">
-                <strong>GitHub Repository:</strong> <span class="footer-url">https://github.com/yijun-xiang/ignis-divinus</span>
-            </div>
-            <div class="footer-link-item">
-                <strong>Course Project Page:</strong> <span class="footer-url">https://cs184.eecs.berkeley.edu/su25/project/</span>
-            </div>
+            <a href="https://yijun-xiang.github.io/ignis-divinus/" target="_blank">
+                Proposal Webpage
+                <span class="footer-url">https://yijun-xiang.github.io/ignis-divinus/</span>
+            </a>
+            <a href="https://github.com/yijun-xiang/ignis-divinus" target="_blank">
+                GitHub Repository
+                <span class="footer-url">https://github.com/yijun-xiang/ignis-divinus</span>
+            </a>
+            <a href="https://cs184.eecs.berkeley.edu/su25/project/" target="_blank">
+                Course Project Page
+                <span class="footer-url">https://cs184.eecs.berkeley.edu/su25/project/</span>
+            </a>
         </div>
     </footer>
 
     <script>
-        // Create fire particles
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -753,10 +806,8 @@
             }, 5000);
         }
 
-        // Create particles periodically
         setInterval(createParticle, 200);
 
-        // Smooth scroll highlighting
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
 
@@ -778,7 +829,6 @@
             });
         });
 
-        // Fade out proposal button and course info on scroll
         const proposalButton = document.getElementById('proposalButton');
         const courseInfo = document.getElementById('courseInfo');
         const header = document.querySelector('header');
@@ -787,29 +837,32 @@
             const scrolled = window.pageYOffset;
             const headerHeight = header.offsetHeight;
             
-            // Start fading out when scrolled past 30% of header
             if (scrolled > headerHeight * 0.3) {
                 const fadeStart = headerHeight * 0.3;
                 const fadeEnd = headerHeight * 0.6;
                 const fadeRange = fadeEnd - fadeStart;
                 const fadeProgress = Math.min((scrolled - fadeStart) / fadeRange, 1);
                 
-                // Fade out proposal button
                 proposalButton.style.opacity = 1 - fadeProgress;
                 proposalButton.style.transform = `translateY(${-20 * fadeProgress}px)`;
                 
-                // Fade out course info
                 courseInfo.style.opacity = 1 - fadeProgress;
                 courseInfo.style.transform = `translateY(${-10 * fadeProgress}px)`;
+                
+                if (fadeProgress >= 1) {
+                    proposalButton.style.pointerEvents = 'none';
+                } else {
+                    proposalButton.style.pointerEvents = 'auto';
+                }
             } else {
                 proposalButton.style.opacity = 1;
                 proposalButton.style.transform = 'translateY(0)';
+                proposalButton.style.pointerEvents = 'auto';
                 
                 courseInfo.style.opacity = 1;
                 courseInfo.style.transform = 'translateY(0)';
             }
             
-            // Parallax effect for header
             header.style.transform = `translateY(${scrolled * 0.5}px)`;
         });
     </script>
