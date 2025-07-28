@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignis Divinus - CS 184 Final Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --fire-orange: #ff6b35;
+            --fire-yellow: #ffcc00;
+            --fire-red: #c41e3a;
+            --smoke-gray: #2a2a2a;
+            --bg-dark: #0a0a0a;
+            --text-light: #f0f0f0;
+            --accent-blue: #4a90e2;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .fire-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0f0f 50%, #0a0a0a 100%);
+            z-index: -1;
+        }
+
+        .fire-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            background: radial-gradient(circle, var(--fire-yellow) 0%, var(--fire-orange) 50%, transparent 70%);
+            border-radius: 50%;
+            animation: float-up 4s infinite ease-out;
+            opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--fire-orange), var(--fire-yellow), var(--fire-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fire-glow 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fire-glow {
+            from {
+                text-shadow: 0 0 20px rgba(255, 107, 53, 0.5),
+                           0 0 40px rgba(255, 107, 53, 0.3),
+                           0 0 60px rgba(255, 107, 53, 0.1);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(255, 204, 0, 0.7),
+                           0 0 50px rgba(255, 204, 0, 0.5),
+                           0 0 70px rgba(255, 204, 0, 0.3);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .team {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--fire-orange);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Content sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, var(--fire-orange), var(--fire-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin: 30px 0 20px;
+            color: var(--fire-yellow);
+        }
+
+        p, li {
+            margin-bottom: 15px;
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li::before {
+            content: "▸ ";
+            color: var(--fire-orange);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Schedule timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--fire-orange), var(--fire-yellow));
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+            padding-left: 100px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--fire-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--fire-yellow);
+            margin-bottom: 10px;
+        }
+
+        /* Code blocks */
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            color: var(--fire-yellow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+            
+            .timeline-item {
+                padding-left: 60px;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item::before {
+                left: 10px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="fire-bg"></div>
+    <div class="fire-particles" id="particles"></div>
+
+    <header>
+        <h1 class="title">Ignis Divinus</h1>
+        <p class="subtitle">Interactive 3D Lighter with Real-time Volumetric Fire Rendering and Screen-Space Heat Refraction</p>
+        <div class="team">
+            <div class="team-member">Chenyang Zhang</div>
+            <div class="team-member">Huachen Qu</div>
+            <div class="team-member">Muze Du</div>
+            <div class="team-member">Yijun Xiang</div>
+        </div>
+        <p style="margin-top: 30px; color: #999;">CS 184 Summer 2025 | UC Berkeley</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#goals">Goals</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#resources">Resources</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="summary">
+            <h2>Project Summary</h2>
+            <div class="card">
+                <p>We will build an interactive 3D lighter simulation featuring physically-based volumetric fire rendering with real-time heat haze effects. Using Taichi for GPU acceleration, our system will combine 3D fluid simulation, volumetric ray marching with blackbody radiation coloring, and screen-space refraction to create a cinematic-quality fire effect.</p>
+                <p>The final deliverable will be an interactive demo where users can control various parameters while maintaining real-time performance at 30+ FPS.</p>
+            </div>
+        </section>
+
+        <section id="problem">
+            <h2>Problem Description</h2>
+            <div class="card">
+                <p>Traditional fire effects in real-time graphics often rely on 2D sprite-based approximations or simplified particle systems that lack volumetric depth and realistic interaction with the environment. The challenge lies in achieving physically accurate fire simulation and rendering at interactive framerates while incorporating advanced visual effects like heat distortion.</p>
+                
+                <h3>Key Technical Challenges</h3>
+                <ul>
+                    <li><strong>Real-time 3D fluid simulation</strong> at sufficient resolution to capture small-scale vortex structures</li>
+                    <li><strong>Volumetric rendering</strong> that accurately represents fire's emission and absorption properties</li>
+                    <li><strong>Heat haze effects</strong> through screen-space refraction based on temperature gradients</li>
+                    <li><strong>Performance optimization</strong> to maintain 30+ FPS while running complex simulations and rendering</li>
+                </ul>
+                
+                <p>We will solve these challenges by leveraging GPU acceleration through Taichi, implementing efficient algorithms like semi-Lagrangian advection and ray marching with early termination, and carefully balancing visual quality with performance.</p>
+            </div>
+        </section>
+
+        <section id="goals">
+            <h2>Goals and Deliverables</h2>
+            
+            <h3>What We Plan to Deliver (Baseline Plan)</h3>
+            <div class="card">
+                <ul>
+                    <li><strong>3D Fluid Simulation System</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>Stable Fluids implementation with 96³ grid resolution</li>
+                            <li>Semi-Lagrangian advection with Jacobi pressure solver (40 iterations)</li>
+                            <li>Real-time performance: ≥30 FPS average at 1920×1080</li>
+                        </ul>
+                    </li>
+                    <li><strong>Volumetric Fire Rendering</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>Ray marching with blackbody radiation color mapping</li>
+                            <li>Temperature-based emission and density-based absorption</li>
+                            <li>Post-processing: bloom and filmic tone mapping</li>
+                        </ul>
+                    </li>
+                    <li><strong>Screen-Space Heat Refraction</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>Temperature gradient (∇T) based refraction normal calculation</li>
+                            <li>Adjustable refraction strength with visual comparisons</li>
+                            <li>Temporal filtering to reduce flickering</li>
+                        </ul>
+                    </li>
+                    <li><strong>Dynamic Lighting</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>Fire emission contributing to diffuse and specular lighting on lighter case</li>
+                            <li>Real-time toggle between lighting on/off for comparison</li>
+                        </ul>
+                    </li>
+                    <li><strong>Evaluation Framework</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>Automated benchmarking script measuring FPS, frame times, memory usage</li>
+                            <li>Ablation studies with matrices showing different configurations</li>
+                            <li>Visual comparison tools (side-by-side renders, brightness profiles)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h3>What We Hope to Deliver (Aspirational Plan)</h3>
+            <div class="card">
+                <ul>
+                    <li><strong>Enhanced Simulation</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>128³ grid resolution maintaining ≥25 FPS</li>
+                            <li>BFECC/MacCormack advection schemes with side-by-side comparison</li>
+                            <li>Vorticity confinement for better small-scale details</li>
+                        </ul>
+                    </li>
+                    <li><strong>Additional Visual Effects</strong> (at least one of):
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>Particle-based sparks system</li>
+                            <li>Smoke simulation when flame is extinguished</li>
+                            <li>Enhanced PBR materials on lighter case with environment mapping</li>
+                        </ul>
+                    </li>
+                    <li><strong>Advanced Analysis Tools</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>Brightness profile analysis with quantitative metrics</li>
+                            <li>Shadow area statistics for lighting validation</li>
+                            <li>Illumination falloff curve visualization</li>
+                        </ul>
+                    </li>
+                    <li><strong>Cinematic Quality</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>10-20 second offline-rendered sequence with film-quality settings</li>
+                            <li>Advanced compositing and color grading</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="schedule">
+            <h2>Project Schedule</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 1 (July 28 - August 3)</div>
+                    <h3>Minimum Viable System</h3>
+                    <ul>
+                        <li>Implement 3D fluid simulation (96³) with Semi-Lagrangian advection</li>
+                        <li>Basic volumetric rendering with ray marching</li>
+                        <li>Blackbody radiation LUT and initial post-processing</li>
+                        <li>Screen-space refraction module with ∇T calculation</li>
+                        <li>UI sliders for parameter control</li>
+                        <li>FPS counter and basic timing infrastructure</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Milestone (August 4)</div>
+                    <h3>Progress Checkpoint</h3>
+                    <ul>
+                        <li>1-page milestone webpage</li>
+                        <li>1-minute progress video (all members present)</li>
+                        <li>2-3 presentation slides</li>
+                        <li>Demo: real-time parameter adjustment, initial ablation studies</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Week 2 (August 5 - August 11)</div>
+                    <h3>Enhancement and Polish</h3>
+                    <ul>
+                        <li>Attempt 128³ resolution and BFECC implementation</li>
+                        <li>Add particle sparks or smoke effects (stretch goal)</li>
+                        <li>Enhance lighter case materials and scene composition</li>
+                        <li>Implement batch evaluation scripts and graph generation</li>
+                        <li>Film offline sequences for final video</li>
+                        <li>Optimize performance bottlenecks</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Final Deliverables (August 12)</div>
+                    <h3>Project Completion</h3>
+                    <ul>
+                        <li>2-3 page final report webpage</li>
+                        <li>1-2 minute polished video</li>
+                        <li>GIF/video clips</li>
+                        <li>Source code and reproduction scripts</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources">
+            <h2>Resources</h2>
+            
+            <h3>References</h3>
+            <div class="card">
+                <h4>Fluid Simulation</h4>
+                <ul>
+                    <li>Stam, J. (1999). "Stable Fluids"</li>
+                    <li>Fedkiw, R., Stam, J., & Jensen, H. W. (2001). "Visual simulation of smoke"</li>
+                    <li>Kim, B., Liu, Y., Llamas, I., & Rossignac, J. (2005). "FlowFixer: Using BFECC for fluid simulation"</li>
+                </ul>
+                
+                <h4>Volume Rendering</h4>
+                <ul>
+                    <li>Wrenninge, M. (2012). "Production Volume Rendering"</li>
+                    <li>Fong, J., Wrenninge, M., Kulla, C., & Habel, R. (2017). "Production volume rendering"</li>
+                </ul>
+                
+                <h4>Heat Distortion</h4>
+                <ul>
+                    <li>Tessendorf, J. (2004). "Simulating Ocean Water"</li>
+                    <li>Various game development resources on screen-space refraction</li>
+                </ul>
+            </div>
+
+            <h3>Computing Platform</h3>
+            <div class="card">
+                <ul>
+                    <li><strong>Framework:</strong> Taichi (GPU-accelerated Python)</li>
+                    <li><strong>Hardware:</strong> NVIDIA GPU with 8GB+ VRAM recommended</li>
+                    <li><strong>Development:</strong> Python 3.8+, Taichi 1.6+</li>
+                    <li><strong>Additional Tools:</strong>
+                        <ul style="margin-left: 30px; margin-top: 10px;">
+                            <li>FFmpeg for video encoding</li>
+                            <li>Matplotlib/Seaborn for performance graphs</li>
+                            <li>OpenEXR for high-quality frame export</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h3>Starting Code</h3>
+            <div class="card">
+                <ul>
+                    <li>Taichi examples for fluid simulation</li>
+                    <li>Custom ray marching implementation</li>
+                    <li>Blackbody radiation lookup tables from scientific literature</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>CS 184: Computer Graphics and Imaging | Summer 2025</p>
+        <p>University of California, Berkeley</p>
+    </footer>
+
+    <script>
+        // Create fire particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 30 + 10;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 5000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 200);
+
+        // Smooth scroll highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--fire-orange)';
+                }
+            });
+        });
+
+        // Parallax effect for header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
