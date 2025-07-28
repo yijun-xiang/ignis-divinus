@@ -137,6 +137,13 @@
             box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
+        /* Course info - will fade out */
+        .course-info {
+            margin-top: 30px;
+            color: #999;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
         /* Proposal Link Button */
         .proposal-link-container {
             margin-top: 40px;
@@ -455,7 +462,7 @@
             <div class="team-member">Muze Du</div>
             <div class="team-member">Yijun Xiang</div>
         </div>
-        <p style="margin-top: 30px; color: #999;">CS 184 Summer 2025 | UC Berkeley</p>
+        <p class="course-info" id="courseInfo">CS 184 Summer 2025 | UC Berkeley</p>
         
         <!-- Proposal Link Button -->
         <div class="proposal-link-container" id="proposalButton">
@@ -768,23 +775,29 @@
             });
         });
 
-        // Fade out proposal button on scroll
+        // Fade out proposal button and course info on scroll
         const proposalButton = document.getElementById('proposalButton');
+        const courseInfo = document.getElementById('courseInfo');
         const header = document.querySelector('header');
         
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const headerHeight = header.offsetHeight;
             
-            // Start fading out when scrolled past 50% of header
+            // Start fading out when scrolled past 30% of header
             if (scrolled > headerHeight * 0.3) {
                 const fadeStart = headerHeight * 0.3;
                 const fadeEnd = headerHeight * 0.6;
                 const fadeRange = fadeEnd - fadeStart;
                 const fadeProgress = Math.min((scrolled - fadeStart) / fadeRange, 1);
                 
+                // Fade out proposal button
                 proposalButton.style.opacity = 1 - fadeProgress;
                 proposalButton.style.transform = `translateY(${-20 * fadeProgress}px)`;
+                
+                // Fade out course info
+                courseInfo.style.opacity = 1 - fadeProgress;
+                courseInfo.style.transform = `translateY(${-10 * fadeProgress}px)`;
                 
                 if (fadeProgress >= 1) {
                     proposalButton.style.pointerEvents = 'none';
@@ -795,6 +808,9 @@
                 proposalButton.style.opacity = 1;
                 proposalButton.style.transform = 'translateY(0)';
                 proposalButton.style.pointerEvents = 'auto';
+                
+                courseInfo.style.opacity = 1;
+                courseInfo.style.transform = 'translateY(0)';
             }
             
             // Parallax effect for header
