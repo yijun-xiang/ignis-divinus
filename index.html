@@ -79,6 +79,7 @@
             text-align: center;
             padding: 100px 20px;
             background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            position: relative;
         }
 
         .title {
@@ -139,6 +140,13 @@
         /* Proposal Link Button */
         .proposal-link-container {
             margin-top: 40px;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .proposal-link-container.fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
         }
 
         .proposal-btn {
@@ -450,7 +458,7 @@
         <p style="margin-top: 30px; color: #999;">CS 184 Summer 2025 | UC Berkeley</p>
         
         <!-- Proposal Link Button -->
-        <div class="proposal-link-container">
+        <div class="proposal-link-container" id="proposalButton">
             <a href="https://yijun-xiang.github.io/ignis-divinus/" class="proposal-btn" target="_blank">
                 View Full Proposal Webpage
             </a>
@@ -760,10 +768,36 @@
             });
         });
 
-        // Parallax effect for header
+        // Fade out proposal button on scroll
+        const proposalButton = document.getElementById('proposalButton');
+        const header = document.querySelector('header');
+        
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
-            const header = document.querySelector('header');
+            const headerHeight = header.offsetHeight;
+            
+            // Start fading out when scrolled past 50% of header
+            if (scrolled > headerHeight * 0.3) {
+                const fadeStart = headerHeight * 0.3;
+                const fadeEnd = headerHeight * 0.6;
+                const fadeRange = fadeEnd - fadeStart;
+                const fadeProgress = Math.min((scrolled - fadeStart) / fadeRange, 1);
+                
+                proposalButton.style.opacity = 1 - fadeProgress;
+                proposalButton.style.transform = `translateY(${-20 * fadeProgress}px)`;
+                
+                if (fadeProgress >= 1) {
+                    proposalButton.style.pointerEvents = 'none';
+                } else {
+                    proposalButton.style.pointerEvents = 'auto';
+                }
+            } else {
+                proposalButton.style.opacity = 1;
+                proposalButton.style.transform = 'translateY(0)';
+                proposalButton.style.pointerEvents = 'auto';
+            }
+            
+            // Parallax effect for header
             header.style.transform = `translateY(${scrolled * 0.5}px)`;
         });
     </script>
