@@ -182,7 +182,6 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* Navigation */
         nav {
             position: sticky;
             top: 0;
@@ -224,7 +223,6 @@
             width: 100%;
         }
 
-        /* Content sections */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -278,7 +276,6 @@
             margin-right: 10px;
         }
 
-        /* Cards */
         .card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 107, 53, 0.2);
@@ -294,7 +291,6 @@
             transform: translateY(-5px);
         }
 
-        /* Schedule timeline */
         .timeline {
             position: relative;
             padding: 20px 0;
@@ -334,7 +330,6 @@
             margin-bottom: 10px;
         }
 
-        /* Code blocks */
         code {
             background: rgba(255, 255, 255, 0.1);
             padding: 2px 6px;
@@ -343,7 +338,6 @@
             color: var(--fire-yellow);
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 50px 20px;
@@ -352,7 +346,6 @@
             color: #666;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .title {
                 font-size: 2.5rem;
@@ -379,7 +372,6 @@
             }
         }
 
-        /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
@@ -632,7 +624,6 @@
     </footer>
 
     <script>
-        // Create fire particles
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -651,10 +642,8 @@
             }, 5000);
         }
 
-        // Create particles periodically
         setInterval(createParticle, 200);
 
-        // Smooth scroll highlighting
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
 
@@ -676,7 +665,6 @@
             });
         });
 
-        // Fade out proposal button and course info on scroll
         const proposalButton = document.getElementById('proposalButton');
         const courseInfo = document.getElementById('courseInfo');
         const header = document.querySelector('header');
@@ -685,18 +673,15 @@
             const scrolled = window.pageYOffset;
             const headerHeight = header.offsetHeight;
             
-            // Start fading out when scrolled past 30% of header
             if (scrolled > headerHeight * 0.3) {
                 const fadeStart = headerHeight * 0.3;
                 const fadeEnd = headerHeight * 0.6;
                 const fadeRange = fadeEnd - fadeStart;
                 const fadeProgress = Math.min((scrolled - fadeStart) / fadeRange, 1);
                 
-                // Fade out proposal button
                 proposalButton.style.opacity = 1 - fadeProgress;
                 proposalButton.style.transform = `translateY(${-20 * fadeProgress}px)`;
                 
-                // Fade out course info
                 courseInfo.style.opacity = 1 - fadeProgress;
                 courseInfo.style.transform = `translateY(${-10 * fadeProgress}px)`;
             } else {
@@ -707,7 +692,6 @@
                 courseInfo.style.transform = 'translateY(0)';
             }
             
-            // Parallax effect for header
             header.style.transform = `translateY(${scrolled * 0.5}px)`;
         });
     </script>
