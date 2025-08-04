@@ -40,6 +40,40 @@
             z-index: -1;
         }
 
+        .fire-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            background: radial-gradient(circle, var(--fire-yellow) 0%, var(--fire-orange) 50%, transparent 70%);
+            border-radius: 50%;
+            animation: float-up 4s infinite ease-out;
+            opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
         /* Header */
         header {
             text-align: center;
@@ -320,6 +354,7 @@
 </head>
 <body>
     <div class="fire-bg"></div>
+    <div class="fire-particles" id="particles"></div>
 
     <header>
         <a href="index.html" class="back-link">← Back to Home</a>
@@ -556,5 +591,50 @@
         <p>CS 184: Computer Graphics | Summer 2025 | UC Berkeley</p>
         <p style="margin-top: 10px;"><a href="index.html" style="color: var(--fire-orange); text-decoration: none;">← Back to Home</a></p>
     </footer>
+
+    <script>
+        // Fire particles animation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 30 + 10;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 5000);
+        }
+
+        setInterval(createParticle, 200);
+
+        // Smooth scroll effect
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--fire-orange)';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
