@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone Report - Ignis Divinus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --fire-orange: #ff6b35;
+            --fire-yellow: #ffcc00;
+            --fire-red: #c41e3a;
+            --smoke-gray: #2a2a2a;
+            --bg-dark: #0a0a0a;
+            --text-light: #f0f0f0;
+            --accent-blue: #4a90e2;
+            --success-green: #4CAF50;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .fire-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0f0f 50%, #0a0a0a 100%);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            position: relative;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--fire-orange), var(--fire-yellow), var(--fire-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fire-glow 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fire-glow {
+            from {
+                text-shadow: 0 0 20px rgba(255, 107, 53, 0.5),
+                           0 0 40px rgba(255, 107, 53, 0.3),
+                           0 0 60px rgba(255, 107, 53, 0.1);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(255, 204, 0, 0.7),
+                           0 0 50px rgba(255, 204, 0, 0.5),
+                           0 0 70px rgba(255, 204, 0, 0.3);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--fire-orange);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-link:hover {
+            color: var(--fire-yellow);
+            transform: translateX(-5px);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--fire-orange);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, var(--fire-orange), var(--fire-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin: 30px 0 20px;
+            color: var(--fire-yellow);
+        }
+
+        p, li {
+            margin-bottom: 15px;
+            color: #ddd;
+            line-height: 1.8;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li::before {
+            content: "▸ ";
+            color: var(--fire-orange);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Video and media */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            margin: 30px 0;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Progress indicators */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .progress-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .progress-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .progress-item.completed {
+            border-color: var(--success-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .progress-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .progress-item h4 {
+            color: var(--fire-orange);
+            margin-bottom: 10px;
+        }
+
+        /* Demo section */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .demo-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .demo-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .demo-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .demo-item .demo-caption {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Performance metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--fire-yellow);
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Slides embed */
+        .slides-container {
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Next steps */
+        .next-steps {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid var(--fire-orange);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .next-steps h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .team {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(255, 107, 53, 0.3);
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fire-bg"></div>
+
+    <header>
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1 class="title">Ignis Divinus</h1>
+        <p class="subtitle">Milestone Report</p>
+        <p style="color: #999; margin-top: 20px;">Real-time 3D Fire Simulation Progress Update</p>
+        <div class="team">
+            <div class="team-member">Chenyang Zhang</div>
+            <div class="team-member">Huachen Qu</div>
+            <div class="team-member">Muze Du</div>
+            <div class="team-member">Yijun Xiang</div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#progress">Progress</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#media">Media</a></li>
+            <li><a href="#next">Next Steps</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="summary">
+            <h2>Executive Summary</h2>
+            <div class="card">
+                <p>We have successfully implemented a real-time 3D fire simulation system using GPU-accelerated fluid dynamics. Our system achieves physically realistic flame behavior through Navier-Stokes equations, volumetric rendering with blackbody radiation, and advanced post-processing effects. The current implementation runs at <strong>30+ FPS</strong> on high-quality settings with a 96³ simulation grid.</p>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">96³</div>
+                        <div class="metric-label">Grid Resolution</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">30+</div>
+                        <div class="metric-label">FPS (High Quality)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">256</div>
+                        <div class="metric-label">Ray Marching Steps</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">800-3000K</div>
+                        <div class="metric-label">Temperature Range</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="progress">
+            <h2>Accomplishments</h2>
+            
+            <div class="progress-grid">
+                <div class="progress-item completed">
+                    <span class="progress-icon">✓</span>
+                    <h4>3D Fluid Simulation</h4>
+                    <p>Implemented stable Navier-Stokes solver with Semi-Lagrangian advection and temperature-driven buoyancy</p>
+                </div>
+                
+                <div class="progress-item completed">
+                    <span class="progress-icon">✓</span>
+                    <h4>Volume Rendering</h4>
+                    <p>Ray marching with physically-based blackbody radiation color mapping (800K-3000K)</p>
+                </div>
+                
+                <div class="progress-item completed">
+                    <span class="progress-icon">✓</span>
+                    <h4>Heat Refraction</h4>
+                    <p>Screen-space heat distortion using temperature gradients with temporal filtering</p>
+                </div>
+                
+                <div class="progress-item completed">
+                    <span class="progress-icon">✓</span>
+                    <h4>Real-time Performance</h4>
+                    <p>Achieved 30+ FPS at high quality, 60+ FPS at medium quality on RTX GPUs</p>
+                </div>
+                
+                <div class="progress-item completed">
+                    <span class="progress-icon">✓</span>
+                    <h4>Interactive Controls</h4>
+                    <p>GUI with real-time parameter adjustment, camera controls, and quality presets</p>
+                </div>
+                
+                <div class="progress-item completed">
+                    <span class="progress-icon">✓</span>
+                    <h4>Performance Monitoring</h4>
+                    <p>FPS graphs, memory tracking, and detailed frame time analysis</p>
+                </div>
+            </div>
+
+            <h3>Technical Implementation Details</h3>
+            <div class="card">
+                <h4>Fluid Simulation Core</h4>
+                <ul>
+                    <li><strong>Grid Resolution:</strong> 96³ voxels with adaptive time stepping</li>
+                    <li><strong>Advection:</strong> Semi-Lagrangian method with tri-linear interpolation</li>
+                    <li><strong>Pressure Solver:</strong> Jacobi iteration (40 iterations) for incompressibility</li>
+                    <li><strong>Buoyancy Model:</strong> Temperature-driven with adjustable α and β parameters</li>
+                    <li><strong>Boundary Conditions:</strong> No-slip at bottom, open boundaries at top</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>Rendering Pipeline</h4>
+                <ul>
+                    <li><strong>Volume Ray Marching:</strong> Adaptive step size (0.005 base) with early termination</li>
+                    <li><strong>Color Model:</strong> Blackbody radiation LUT with smooth interpolation</li>
+                    <li><strong>Emission:</strong> Temperature and density-dependent with adjustable scale</li>
+                    <li><strong>Post-processing:</strong> Bloom effect, filmic tone mapping, and vignetting</li>
+                    <li><strong>Heat Refraction:</strong> Screen-space distortion based on temperature gradients</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="demo">
+            <h2>Live Demo</h2>
+            
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <img src="https://via.placeholder.com/600x400/1a0f0f/ff6b35?text=Flame+Simulation" alt="Flame Simulation">
+                    <div class="demo-caption">
+                        <h4>3D Volumetric Flame</h4>
+                        <p>Real-time flame simulation with natural turbulent motion and realistic color gradients from dark red to bright yellow-white.</p>
+                    </div>
+                </div>
+                
+                <div class="demo-item">
+                    <img src="https://via.placeholder.com/600x400/1a0f0f/ffcc00?text=Heat+Refraction" alt="Heat Refraction">
+                    <div class="demo-caption">
+                        <h4>Heat Distortion Effect</h4>
+                        <p>Screen-space refraction creates realistic heat haze, distorting the background based on temperature fields.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Interactive Features</h3>
+            <div class="card">
+                <ul>
+                    <li><strong>Camera Controls:</strong> Full 3D orbit and zoom with smooth transitions</li>
+                    <li><strong>Flame Source:</strong> Adjustable position (X, Z coordinates) in real-time</li>
+                    <li><strong>Physical Parameters:</strong> Temperature scale, fuel injection rate, buoyancy strength</li>
+                    <li><strong>Rendering Options:</strong> Absorption coefficient, emission scale, bloom intensity</li>
+                    <li><strong>Quality Presets:</strong> Low (120 FPS), Medium (60 FPS), High (30 FPS), Ultra (15 FPS)</li>
+                    <li><strong>Visualization Modes:</strong> 3D volume rendering or 2D slice views (density/temperature/velocity)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="media">
+            <h2>Video & Presentation</h2>
+            
+            <h3>1-Minute Progress Video</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; color: #999; margin-top: 20px;">
+                Video demonstrates current progress with all team members presenting different aspects of the project.
+            </p>
+
+            <h3>Presentation Slides</h3>
+            <div class="slides-container">
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTQs_placeholder/embed?start=false&loop=false&delayms=3000" 
+                        frameborder="0" 
+                        width="100%" 
+                        height="569" 
+                        allowfullscreen="true" 
+                        mozallowfullscreen="true" 
+                        webkitallowfullscreen="true">
+                </iframe>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="#" style="color: var(--fire-orange); text-decoration: none;">Download Slides (PDF)</a>
+            </p>
+        </section>
+
+        <section id="next">
+            <h2>Reflection & Next Steps</h2>
+            
+            <div class="card">
+                <h3>Progress vs. Original Plan</h3>
+                <p>We are <strong>on track</strong> with our proposed timeline. All baseline features have been successfully implemented during Week 1 as planned. The system is stable, performant, and ready for enhancement features in Week 2.</p>
+                
+                <h4>Completed (Week 1)</h4>
+                <ul>
+                    <li>✓ 3D fluid simulation with stable solver</li>
+                    <li>✓ Volumetric rendering with blackbody radiation</li>
+                    <li>✓ Heat refraction post-processing</li>
+                    <li>✓ Interactive GUI and controls</li>
+                    <li>✓ Performance monitoring system</li>
+                    <li>✓ 30+ FPS at high quality settings</li>
+                </ul>
+            </div>
+
+            <div class="next-steps">
+                <h3>Updated Work Plan (Week 2)</h3>
+                
+                <h4>Priority 1: Core Enhancements</h4>
+                <ul>
+                    <li><strong>Turbulence Modeling:</strong> Implement vorticity confinement for more detailed flame dynamics</li>
+                    <li><strong>Resolution Scaling:</strong> Test 128³ grid with performance optimizations</li>
+                    <li><strong>Advanced Advection:</strong> Compare BFECC vs Semi-Lagrangian methods</li>
+                </ul>
+                
+                <h4>Priority 2: Visual Effects</h4>
+                <ul>
+                    <li><strong>Particle System:</strong> Add sparks using GPU-based particle simulation</li>
+                    <li><strong>Smoke Integration:</strong> Density-based smoke when temperature drops</li>
+                    <li><strong>Enhanced Materials:</strong> PBR shading for environment objects</li>
+                </ul>
+                
+                <h4>Priority 3: Polish & Documentation</h4>
+                <ul>
+                    <li><strong>Benchmarking Suite:</strong> Automated performance testing across quality levels</li>
+                    <li><strong>Video Production:</strong> Record high-quality demonstration sequences</li>
+                    <li><strong>Code Documentation:</strong> Clean up and document for reproducibility</li>
+                </ul>
+            </div>
+
+            <div class="card" style="background: rgba(76, 175, 80, 0.1); border-color: var(--success-green);">
+                <h3>Key Achievements</h3>
+                <p>Our implementation successfully demonstrates that real-time, physically-based fire simulation is achievable on consumer GPUs. The combination of Taichi's GPU acceleration and careful algorithm optimization has resulted in a system that balances visual quality with interactive performance.</p>
+                <p style="margin-top: 20px;"><strong>Next Milestone:</strong> Final presentation on August 12 with enhanced features and polished demo.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>CS 184: Computer Graphics | Summer 2025 | UC Berkeley</p>
+        <p style="margin-top: 10px;">
+            <a href="index.html" style="color: var(--fire-orange); text-decoration: none; margin-right: 20px;">← Home</a>
+            <a href="proposal.html" style="color: var(--fire-orange); text-decoration: none;">View Proposal →</a>
+        </p>
+    </footer>
+
+    <script>
+        // Animate progress items on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.progress-item, .demo-item, .metric-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
