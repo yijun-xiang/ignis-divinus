@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
         .fire-bg {
             position: fixed;
             top: 0;
@@ -74,7 +73,6 @@
             }
         }
 
-        /* Header */
         header {
             text-align: center;
             padding: 60px 20px;
@@ -593,7 +591,6 @@
     </footer>
 
     <script>
-        // Fire particles animation
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -614,7 +611,6 @@
 
         setInterval(createParticle, 200);
 
-        // Smooth scroll effect
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
 
