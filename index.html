@@ -520,76 +520,94 @@
         
         /* Flame divider */
         .flame-divider {
-            width: 100px;
-            height: 100px;
-            margin: -20px auto 20px;
+            width: 80px;
+            height: 80px;
+            margin: 10px auto 30px;
             position: relative;
+            transform: scale(1.2);
         }
         
-        .flame {
+        .flame-icon {
             position: absolute;
             width: 100%;
             height: 100%;
-            filter: blur(10px);
-            animation: flicker 2s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            animation: flame-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.6));
         }
         
-        .flame-red {
-            background: radial-gradient(ellipse at bottom, transparent 20%, #ff6b35 40%, transparent 70%);
-            animation-delay: 0s;
-        }
-        
-        .flame-orange {
-            background: radial-gradient(ellipse at bottom, transparent 30%, #ff8c42 50%, transparent 80%);
-            animation-delay: 0.2s;
-            transform: scale(0.9);
-        }
-        
-        .flame-yellow {
-            background: radial-gradient(ellipse at bottom, transparent 40%, #ffcc00 60%, transparent 90%);
-            animation-delay: 0.4s;
-            transform: scale(0.7);
-        }
-        
-        .flame-inner {
-            position: absolute;
-            width: 40%;
-            height: 60%;
-            left: 30%;
-            bottom: 0;
-            background: radial-gradient(ellipse at bottom, #ffffff 0%, #ffcc00 30%, transparent 80%);
-            filter: blur(5px);
-            animation: flicker-inner 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes flicker {
+        @keyframes flame-pulse {
             0%, 100% {
-                transform: scaleY(1) rotate(-2deg);
-                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.6))
+                        drop-shadow(0 0 40px rgba(255, 204, 0, 0.4));
             }
             25% {
-                transform: scaleY(1.1) rotate(2deg);
-                opacity: 0.9;
+                transform: scale(1.1) translateY(-2px) rotate(2deg);
             }
             50% {
-                transform: scaleY(0.95) rotate(-1deg);
-                opacity: 1;
+                transform: scale(0.95) translateY(1px) rotate(-1deg);
+                filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.8))
+                        drop-shadow(0 0 50px rgba(255, 204, 0, 0.6));
             }
             75% {
-                transform: scaleY(1.05) rotate(1deg);
-                opacity: 0.95;
+                transform: scale(1.05) translateY(-1px) rotate(1deg);
             }
         }
         
-        @keyframes flicker-inner {
-            0%, 100% {
-                transform: scaleY(1) scaleX(1);
-                opacity: 0.8;
-            }
-            50% {
-                transform: scaleY(1.2) scaleX(0.8);
-                opacity: 1;
-            }
+        /* Alternative CSS flame */
+        .css-flame {
+            width: 60px;
+            height: 80px;
+            position: relative;
+            margin: 0 auto;
+            transform-origin: center bottom;
+            animation: sway 3s ease-in-out infinite;
+        }
+        
+        .css-flame::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, 
+                #ff6b35 0%, 
+                #ff8c42 20%, 
+                #ffcc00 40%, 
+                #ffe066 60%, 
+                transparent 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            filter: blur(2px);
+        }
+        
+        .css-flame::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 60%;
+            left: 25%;
+            bottom: 10%;
+            background: linear-gradient(to top, 
+                #ffcc00 0%, 
+                #ffe066 50%, 
+                #ffffff 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            filter: blur(1px);
+            animation: inner-flame 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg) scale(1); }
+            33% { transform: rotate(2deg) scale(1.05); }
+            66% { transform: rotate(-1deg) scale(0.98); }
+        }
+        
+        @keyframes inner-flame {
+            0%, 100% { transform: scaleY(1) scaleX(1); }
+            50% { transform: scaleY(1.2) scaleX(0.8); }
         }
         
         html {
@@ -614,10 +632,9 @@
     </header>
     
     <div class="flame-divider">
-        <div class="flame flame-red"></div>
-        <div class="flame flame-orange"></div>
-        <div class="flame flame-yellow"></div>
-        <div class="flame-inner"></div>
+        <div class="flame-icon">🔥</div>
+        <!-- Alternative CSS flame if emoji doesn't look good -->
+        <!-- <div class="css-flame"></div> -->
     </div>
 
     <main class="container">
