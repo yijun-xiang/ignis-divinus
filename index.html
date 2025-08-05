@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
         .fire-bg {
             position: fixed;
             top: 0;
@@ -74,7 +73,6 @@
             }
         }
 
-        /* Header */
         header {
             text-align: center;
             padding: 80px 20px 60px;
@@ -137,14 +135,12 @@
             box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
-        /* Course info - will fade out */
         .course-info {
             margin-top: 30px;
             color: #999;
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        /* Proposal Link Container */
         .proposal-link-container {
             margin-top: 40px;
             transition: opacity 0.5s ease, transform 0.5s ease;
@@ -372,7 +368,6 @@
             }
         }
 
-        /* Project cards */
         .hero-content {
             text-align: center;
             padding: 20px 0 40px;
@@ -465,7 +460,6 @@
             text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
         }
         
-        /* Highlights grid */
         .demo-preview {
             background: rgba(0, 0, 0, 0.5);
             border-radius: 20px;
@@ -518,7 +512,6 @@
             line-height: 1.5;
         }
         
-        /* Flame divider */
         .flame-divider {
             width: 80px;
             height: 80px;
@@ -558,7 +551,6 @@
             }
         }
         
-        /* Alternative CSS flame */
         .css-flame {
             width: 60px;
             height: 80px;
@@ -622,6 +614,13 @@
     <header>
         <h1 class="title">Ignis Divinus</h1>
         <p class="subtitle">Real-time 3D Fire Simulation with GPU Acceleration</p>
+        <div style="margin-top: 20px;">
+            <a href="https://yijun-xiang.github.io/ignis-divinus/" style="color: #ffcc00; font-size: 1.2rem; font-weight: bold; text-decoration: none; background: rgba(255, 204, 0, 0.1); padding: 10px 20px; border-radius: 20px; border: 2px solid #ffcc00; display: inline-block; transition: all 0.3s ease;" 
+               onmouseover="this.style.background='rgba(255, 204, 0, 0.3)'; this.style.transform='scale(1.05)'" 
+               onmouseout="this.style.background='rgba(255, 204, 0, 0.1)'; this.style.transform='scale(1)'">
+                https://yijun-xiang.github.io/ignis-divinus/
+            </a>
+        </div>
         <div class="team">
             <div class="team-member">Chenyang Zhang</div>
             <div class="team-member">Huachen Qu</div>
@@ -731,7 +730,6 @@
             });
         });
 
-        // Add smooth reveal animation for project cards
         const cards = document.querySelectorAll('.project-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
