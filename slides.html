@@ -551,7 +551,6 @@
             
             slides[currentSlide].classList.add('active');
             
-            // Update navigation buttons
             document.getElementById('prevBtn').disabled = currentSlide === 0;
             document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
         }
@@ -560,13 +559,11 @@
             showSlide(currentSlide + direction);
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') changeSlide(1);
             if (e.key === 'ArrowLeft') changeSlide(-1);
         });
 
-        // Initialize
         showSlide(0);
     </script>
 </body>
