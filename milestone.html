@@ -30,7 +30,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
         .fire-bg {
             position: fixed;
             top: 0;
@@ -75,7 +74,6 @@
             }
         }
 
-        /* Glowing elements */
         .metric-value {
             font-size: 2.5rem;
             font-weight: bold;
@@ -95,7 +93,6 @@
             }
         }
 
-        /* Header */
         header {
             text-align: center;
             padding: 60px 20px;
@@ -263,7 +260,6 @@
             transform: translateY(-5px);
         }
 
-        /* Video and media */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
@@ -283,7 +279,6 @@
             border: none;
         }
 
-        /* Progress indicators */
         .progress-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -321,7 +316,6 @@
             margin-bottom: 10px;
         }
 
-        /* Demo section */
         .demo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -352,7 +346,6 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* Performance metrics */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -374,7 +367,6 @@
             font-size: 0.9rem;
         }
 
-        /* Slides embed */
         .slides-container {
             margin: 40px 0;
             border-radius: 15px;
@@ -382,7 +374,6 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
-        /* Next steps */
         .next-steps {
             background: rgba(255, 107, 53, 0.1);
             border: 2px solid var(--fire-orange);
@@ -573,7 +564,8 @@
             
             <div class="demo-grid">
                 <div class="demo-item">
-                    <img src="https://via.placeholder.com/600x400/1a0f0f/ff6b35?text=Flame+Simulation" alt="Flame Simulation">
+                    <!-- 替换为实际的截图或GIF -->
+                    <img src="assets/flame-simulation.gif" alt="Flame Simulation Demo">
                     <div class="demo-caption">
                         <h4>3D Volumetric Flame</h4>
                         <p>Real-time flame simulation with natural turbulent motion and realistic color gradients from dark red to bright yellow-white.</p>
@@ -581,7 +573,8 @@
                 </div>
                 
                 <div class="demo-item">
-                    <img src="https://via.placeholder.com/600x400/1a0f0f/ffcc00?text=Heat+Refraction" alt="Heat Refraction">
+                    <!-- 替换为实际的截图或GIF -->
+                    <img src="assets/heat-refraction.gif" alt="Heat Refraction Demo">
                     <div class="demo-caption">
                         <h4>Heat Distortion Effect</h4>
                         <p>Screen-space refraction creates realistic heat haze, distorting the background based on temperature fields.</p>
@@ -607,7 +600,7 @@
             
             <h3>1-Minute Progress Video</h3>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                <iframe src="https://drive.google.com/file/d/14oagjbOf3TALPAp_zq1T1_n-58-nuBaL/preview" allowfullscreen></iframe>
             </div>
             <p style="text-align: center; color: #999; margin-top: 20px;">
                 Video demonstrates current progress with all team members presenting different aspects of the project.
@@ -615,7 +608,7 @@
 
             <h3>Presentation Slides</h3>
             <div class="slides-container">
-                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTQs_placeholder/embed?start=false&loop=false&delayms=3000" 
+                <iframe src="https://docs.google.com/presentation/d/1Lqnp2ZbmqBbHL6GjUIirQ6E5znfZXiim/preview?start=false&loop=false&delayms=3000" 
                         frameborder="0" 
                         width="100%" 
                         height="569" 
@@ -625,7 +618,7 @@
                 </iframe>
             </div>
             <p style="text-align: center; margin-top: 20px;">
-                <a href="#" style="color: var(--fire-orange); text-decoration: none;">Download Slides (PDF)</a>
+                <a href="https://docs.google.com/presentation/d/1Lqnp2ZbmqBbHL6GjUIirQ6E5znfZXiim/export/pdf" style="color: var(--fire-orange); text-decoration: none;">Download Slides (PDF)</a>
             </p>
         </section>
 
@@ -689,7 +682,6 @@
     </footer>
 
     <script>
-        // Fire particles animation
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -710,7 +702,6 @@
 
         setInterval(createParticle, 200);
 
-        // Animate progress items on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
@@ -732,7 +723,6 @@
             observer.observe(el);
         });
 
-        // Animated counter for metrics
         function animateValue(element, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
@@ -746,7 +736,6 @@
             window.requestAnimationFrame(step);
         }
 
-        // Animate metric values when they come into view
         const metricObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !entry.target.animated) {
@@ -763,7 +752,6 @@
             metricObserver.observe(el);
         });
 
-        // Smooth scroll for navigation
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
 
