@@ -516,7 +516,7 @@
 
     <header>
         <a href="index.html" class="back-link">← Back to Home</a>
-        <h1 class="title">Ignis Divinus</h1>
+        <h1 class="title"><a href="https://yijun-xiang.github.io/ignis-divinus/final.html" style="text-decoration: none; color: inherit;">Ignis Divinus</a></h1>
         <p class="subtitle">Final Report</p>
         <p style="color: #999; margin-top: 20px;">Real-time 3D Fire Simulation - CS 184 Summer 2025</p>
         <div class="team">
@@ -652,8 +652,10 @@
                 Full demonstration showcasing wind effects, color variations, explosion dynamics, and real-time parameter controls
             </p>
             
-            <div style="text-align: center; margin: 40px 0;">
-                <img src="assets/small-blast.gif" alt="Fire Simulation" style="width: 100%; max-width: 800px; border-radius: 15px; box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3); transform: rotate(-90deg);">
+            <div style="text-align: center; margin: 40px auto; max-width: 600px; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="width: 450px; height: 600px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <img src="assets/small-blast.gif" alt="Fire Simulation" style="width: 600px; height: 450px; border-radius: 15px; box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3); transform: rotate(-90deg); object-fit: cover;">
+                </div>
                 <p style="margin-top: 20px; color: #999;">
                     Comprehensive effect showcase - See video above for detailed feature demonstrations
                 </p>
@@ -770,14 +772,37 @@
                 <div class="member-contribution">
                     <div class="member-name">Muze Du</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">Post-processing Effects</span>
-                        <span class="contribution-tag">Heat Refraction Shader</span>
-                        <span class="contribution-tag">Interactive Controls</span>
-                        <span class="contribution-tag">User Interface Design</span>
-                        <span class="contribution-tag">Video Production</span>
+                        <span class="contribution-tag">Shader Programming</span>
+                        <span class="contribution-tag">Screen-Space Effects</span>
+                        <span class="contribution-tag">Heat Refraction Algorithm</span>
+                        <span class="contribution-tag">Bloom Implementation</span>
+                        <span class="contribution-tag">Real-time Parameter System</span>
                     </div>
-                    <p>Created comprehensive post-processing pipeline including bloom and heat distortion effects. Designed intuitive GUI for real-time parameter control and mode switching. Led video production and demonstration creation showcasing all system features and capabilities.</p>
+                    <p>Implemented advanced post-processing shaders including screen-space heat refraction using displacement mapping. Developed multi-pass bloom algorithm with Gaussian blur kernels. Created real-time parameter interpolation system for smooth transitions and integrated Dear ImGui for technical controls.</p>
                 </div>
+            </div>
+        </section>
+
+        <section id="milestone">
+            <h2>Project Milestones</h2>
+            <div class="card" style="text-align: center;">
+                <h3 style="margin-bottom: 20px;">Milestone Report</h3>
+                <p style="margin-bottom: 20px;">Our progress report detailing the implementation challenges and solutions</p>
+                <a href="milestone.html" style="display: inline-block; padding: 12px 25px; background: var(--fire-orange); color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; margin: 10px;"
+                   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(255, 107, 53, 0.5)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    View Milestone Report
+                </a>
+            </div>
+            
+            <div class="card" style="text-align: center; margin-top: 30px;">
+                <h3 style="margin-bottom: 20px;">Presentation Slides</h3>
+                <p style="margin-bottom: 20px;">Technical overview and implementation details</p>
+                <a href="slides.html" style="display: inline-block; padding: 12px 25px; background: var(--fire-yellow); color: #000; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; margin: 10px;"
+                   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(255, 204, 0, 0.5)';"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    View Presentation Slides
+                </a>
             </div>
         </section>
 
