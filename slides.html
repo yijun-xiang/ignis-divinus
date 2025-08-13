@@ -433,7 +433,7 @@
     <div class="slideshow-container">
         <!-- Slide 1: Title (15 seconds) -->
         <div class="slide active">
-            <div class="slide-number">1 / 6</div>
+            <div class="slide-number">1 / 7</div>
             <div class="flame-animation"></div>
             <div class="slide-header">
                 <h1 class="slide-title">Ignis Divinus</h1>
@@ -467,7 +467,7 @@
 
         <!-- Slide 2: Background and Intro (30 seconds) -->
         <div class="slide">
-            <div class="slide-number">2 / 6</div>
+            <div class="slide-number">2 / 7</div>
             <div class="slide-header">
                 <h1 class="slide-title">The Challenge</h1>
                 <p class="slide-subtitle">Why Fire Simulation Matters</p>
@@ -517,7 +517,7 @@
 
         <!-- Slide 3: Demo / Final Results Teaser (30 seconds) -->
         <div class="slide">
-            <div class="slide-number">3 / 6</div>
+            <div class="slide-number">3 / 7</div>
             <div class="slide-header">
                 <h1 class="slide-title">Live Demo</h1>
                 <p class="slide-subtitle">See It In Action!</p>
@@ -547,7 +547,7 @@
 
         <!-- Slide 4: Technical Approach (1-1.5 min) -->
         <div class="slide">
-            <div class="slide-number">4 / 6</div>
+            <div class="slide-number">4 / 7</div>
             <div class="slide-header">
                 <h1 class="slide-title">Technical Innovation</h1>
                 <p class="slide-subtitle">Our Implementation Pipeline</p>
@@ -597,12 +597,12 @@
             </div>
         </div>
 
-        <!-- Slide 5: More Results (0.5-1.0 min) -->
+        <!-- Slide 5: Interactive Features Part 1 (30 sec) -->
         <div class="slide">
-            <div class="slide-number">5 / 6</div>
+            <div class="slide-number">5 / 7</div>
             <div class="slide-header">
-                <h1 class="slide-title">Feature Showcase</h1>
-                <p class="slide-subtitle">Interactive Capabilities</p>
+                <h1 class="slide-title">Interactive Features</h1>
+                <p class="slide-subtitle">Real-time Control Capabilities</p>
             </div>
             <div class="slide-content">
                 <div class="results-grid">
@@ -611,36 +611,49 @@
                                 allow="autoplay">
                         </iframe>
                         <h4>Wind Interaction</h4>
-                        <p>Real-time directional wind control</p>
+                        <p>Real-time directional wind control with adjustable force</p>
                     </div>
                     <div class="result-item">
                         <iframe src="https://drive.google.com/file/d/1rKN1N3pssSJBLhXDeUkdsP1eF4D4Y_-O/preview" 
                                 allow="autoplay">
                         </iframe>
                         <h4>Dynamic Colors</h4>
-                        <p>Temperature-based color variations</p>
+                        <p>Temperature-based color variations from cool to white-hot</p>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Visual Effects Part 2 (30 sec) -->
+        <div class="slide">
+            <div class="slide-number">6 / 7</div>
+            <div class="slide-header">
+                <h1 class="slide-title">Visual Effects</h1>
+                <p class="slide-subtitle">Advanced Rendering Features</p>
+            </div>
+            <div class="slide-content">
+                <div class="results-grid">
                     <div class="result-item">
                         <iframe src="https://drive.google.com/file/d/1liFU2lPlnSUI7kXXoyN_3H_nHcHTUaA8/preview" 
                                 allow="autoplay">
                         </iframe>
                         <h4>Explosive Bursts</h4>
-                        <p>Dramatic combustion effects</p>
+                        <p>Dramatic combustion effects with particle systems</p>
                     </div>
                     <div class="result-item">
                         <iframe src="https://drive.google.com/file/d/1TM0uOEL8jqAPwqdKahGFElPPGDpws415/preview" 
                                 allow="autoplay">
                         </iframe>
                         <h4>Complete System</h4>
-                        <p>All features working together</p>
+                        <p>All features working together in harmony</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 6: Conclusion (15-30 sec) -->
+        <!-- Slide 7: Conclusion (15-30 sec) -->
         <div class="slide">
-            <div class="slide-number">6 / 6</div>
+            <div class="slide-number">7 / 7</div>
             <div class="slide-header">
                 <h1 class="slide-title">Lessons Learned</h1>
                 <p class="slide-subtitle">Our Journey & Achievements</p>
@@ -686,7 +699,7 @@
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         let timerInterval = null;
-        let slideTimers = [15, 30, 30, 90, 60, 30]; // seconds for each slide
+        let slideTimers = [15, 30, 30, 90, 30, 30, 30]; // seconds for each slide
         let currentTimer = 0;
 
         function showSlide(n) {
