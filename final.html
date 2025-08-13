@@ -518,7 +518,11 @@
         <a href="index.html" class="back-link">← Back to Home</a>
         <h1 class="title">Ignis Divinus</h1>
         <p class="subtitle">Final Report</p>
-        <p style="color: #999; margin-top: 10px; font-size: 0.9rem;">https://yijun-xiang.github.io/ignis-divinus/final.html</p>
+        <div style="margin-top: 15px; padding: 10px 20px; background: rgba(255, 107, 53, 0.1); border: 1px solid var(--fire-orange); border-radius: 10px; display: inline-block;">
+            <p style="color: var(--fire-yellow); font-size: 1rem; font-weight: bold; letter-spacing: 0.5px;">
+                https://yijun-xiang.github.io/ignis-divinus/final.html
+            </p>
+        </div>
         <p style="color: #999; margin-top: 20px;">Real-time 3D Fire Simulation - CS 184 Summer 2025</p>
         <div class="team">
             <div class="team-member">Chenyang Zhang</div>
@@ -645,22 +649,30 @@
         <section id="results">
             <h2>Results</h2>
             
-            <h3>Demo Video</h3>
+            <div style="text-align: center; margin: 40px auto;">
+                <h3 style="font-size: 2.5rem; margin-bottom: 20px; background: linear-gradient(90deg, #8A2BE2, #FF6B35, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-transform: uppercase; letter-spacing: 2px;">
+                    🔥 Arcane Blast
+                </h3>
+                <div style="max-width: 600px; height: 450px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <div style="width: 450px; height: 600px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <img src="assets/small-blast.gif" alt="Arcane Blast Fire Simulation" style="width: 600px; height: 450px; border-radius: 15px; box-shadow: 0 20px 60px rgba(138, 43, 226, 0.4); transform: rotate(-90deg); object-fit: cover;">
+                    </div>
+                </div>
+                <p style="margin-top: 30px; color: #bbb; font-size: 1.1rem;">
+                    Artistic creation showcasing the expressive potential of our fire simulation
+                </p>
+                <p style="margin-top: 10px; color: #999;">
+                    See the video below for technical demonstrations and feature breakdowns
+                </p>
+            </div>
+            
+            <h3 style="margin-top: 60px;">Detailed Feature Demonstration</h3>
             <div class="video-container">
                 <iframe src="https://drive.google.com/file/d/1DYp5ZlH3U0DpFxJQEXef2onEMBGBQo66/preview" allowfullscreen></iframe>
             </div>
             <p style="text-align: center; color: #999; margin: 20px 0 40px;">
                 Full demonstration showcasing wind effects, color variations, explosion dynamics, and real-time parameter controls
             </p>
-            
-            <div style="text-align: center; margin: 40px auto; max-width: 600px; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div style="width: 450px; height: 600px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                    <img src="assets/small-blast.gif" alt="Fire Simulation" style="width: 600px; height: 450px; border-radius: 15px; box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3); transform: rotate(-90deg); object-fit: cover;">
-                </div>
-                <p style="margin-top: 20px; color: #999;">
-                    Comprehensive effect showcase - See video above for detailed feature demonstrations
-                </p>
-            </div>
             
             <div class="metrics-grid">
                 <div class="metric-card">
@@ -749,13 +761,13 @@
                 <div class="member-contribution">
                     <div class="member-name">Chenyang Zhang</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">Fluid3D Core Implementation</span>
                         <span class="contribution-tag">Velocity-Pressure Solver</span>
                         <span class="contribution-tag">Buoyancy Forces</span>
-                        <span class="contribution-tag">Fuel Combustion Model</span>
-                        <span class="contribution-tag">Dissipation Systems</span>
+                        <span class="contribution-tag">Boundary Conditions</span>
+                        <span class="contribution-tag">Algorithm Research</span>
+                        <span class="contribution-tag">Numerical Stability</span>
                     </div>
-                    <p>Implemented Fluid3D class with velocity, density, and temperature fields. Developed Jacobi pressure solver with 80 iterations for stability. Created buoyancy-driven motion with fuel combustion timing. Designed per-second dissipation rates for realistic flame behavior.</p>
+                    <p>Developed Jacobi pressure solver with 80 iterations for incompressible flow. Implemented buoyancy-driven motion using temperature gradients. Designed boundary condition handling for stable simulation. Conducted extensive research on fluid dynamics algorithms.</p>
                 </div>
                 
                 <div class="member-contribution">
@@ -773,13 +785,13 @@
                 <div class="member-contribution">
                     <div class="member-name">Muze Du</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">HeatRefraction Class</span>
+                        <span class="contribution-tag">Fluid3D Implementation</span>
+                        <span class="contribution-tag">Fuel Combustion System</span>
+                        <span class="contribution-tag">HeatRefraction Effects</span>
                         <span class="contribution-tag">PostProcessor Pipeline</span>
-                        <span class="contribution-tag">Screen-Space Distortion</span>
-                        <span class="contribution-tag">Temporal Filtering</span>
-                        <span class="contribution-tag">ImGui Integration</span>
+                        <span class="contribution-tag">Dissipation Modeling</span>
                     </div>
-                    <p>Created HeatRefraction effect with temperature gradient calculation and screen-space projection. Built PostProcessor with bloom and exposure control. Implemented temporal filtering (0.85 strength) for smooth refraction. Integrated Dear ImGui for real-time parameter adjustment.</p>
+                    <p>Co-implemented Fluid3D class with velocity, density, and temperature fields. Developed fuel combustion timing and dissipation rates. Created HeatRefraction with screen-space distortion. Built PostProcessor with bloom and temporal filtering for visual enhancement.</p>
                 </div>
             </div>
         </section>
