@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ignis Divinus - Presentation Slides</title>
+    <title>Ignis Divinus - Presentation Guide</title>
     <style>
         * {
             margin: 0;
@@ -38,7 +38,7 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
             position: relative;
-            overflow: hidden;
+            overflow-y: auto;
         }
 
         .slide.active {
@@ -81,7 +81,7 @@
         }
 
         .slide-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 900;
             background: linear-gradient(45deg, #ff6b35, #ffcc00);
             -webkit-background-clip: text;
@@ -91,171 +91,128 @@
         }
 
         .slide-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #ccc;
         }
 
         .slide-content {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             z-index: 1;
         }
 
-        .team-intro {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-top: 40px;
+        .tips-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 30px 0;
         }
 
-        .team-member-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .team-member-card:hover {
-            background: rgba(255, 107, 53, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .pipeline-diagram {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-
-        .pipeline-step {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            flex: 1;
-            margin: 10px;
-            min-width: 200px;
-            transition: all 0.3s ease;
-        }
-
-        .pipeline-step:hover {
-            background: rgba(255, 107, 53, 0.1);
-            transform: scale(1.05);
-        }
-
-        .pipeline-arrow {
-            font-size: 2rem;
-            color: #ff6b35;
-            margin: 0 20px;
-        }
-
-        .performance-table {
-            margin: 40px auto;
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .performance-table th,
-        .performance-table td {
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            padding: 15px;
-            text-align: center;
-        }
-
-        .performance-table th {
-            background: rgba(255, 107, 53, 0.2);
-            font-weight: bold;
-            color: #ffcc00;
-        }
-
-        .performance-table tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .achievements-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .achievement-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .tips-list li {
+            margin-bottom: 25px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #ff6b35;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            line-height: 1.6;
             transition: all 0.3s ease;
         }
 
-        .achievement-item:hover {
-            background: rgba(76, 175, 80, 0.1);
+        .tips-list li:hover {
+            background: rgba(255, 107, 53, 0.1);
             transform: translateX(10px);
         }
 
-        .achievement-icon {
-            font-size: 2rem;
-            color: #4CAF50;
+        .tips-list li strong {
+            color: #ffcc00;
+            display: block;
+            margin-bottom: 5px;
         }
 
-        .next-steps-grid {
+        .format-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .format-section h3 {
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+
+        .timeline-time {
+            background: #ff6b35;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-content h4 {
+            color: #ffcc00;
+            margin-bottom: 5px;
+        }
+
+        .video-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin: 40px 0;
         }
 
-        .next-step-card {
-            background: rgba(255, 107, 53, 0.1);
-            border: 2px solid #ff6b35;
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 107, 53, 0.3);
             border-radius: 15px;
-            padding: 30px;
+            padding: 25px;
             text-align: center;
             transition: all 0.3s ease;
         }
 
-        .next-step-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        .video-card:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
         }
 
-        .demo-screenshots {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 40px 0;
+        .video-card h4 {
+            color: #ff6b35;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
         }
 
-        .screenshot {
-            background: #000;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
+        .video-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #ffcc00);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 15px;
         }
 
-        .screenshot img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .screenshot-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            text-align: center;
-            color: #ffcc00;
+        .video-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
         }
 
         .navigation {
@@ -302,28 +259,15 @@
             color: #ff6b35;
         }
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        li {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
-        }
-
-        li::before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #ff6b35;
-            font-weight: bold;
-        }
-
         .highlight {
             color: #ffcc00;
             font-weight: bold;
+        }
+
+        .emoji-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            vertical-align: middle;
         }
 
         @media (max-width: 768px) {
@@ -332,201 +276,227 @@
             }
             
             .slide-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
-            .team-intro,
-            .achievements-list,
-            .next-steps-grid,
-            .demo-screenshots {
+            .video-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .pipeline-diagram {
-                flex-direction: column;
-            }
-            
-            .pipeline-arrow {
-                transform: rotate(90deg);
             }
         }
     </style>
 </head>
 <body>
     <div class="slideshow-container">
-        <!-- Slide 1: Title & Team -->
+        <!-- Slide 1: Presentation Tips -->
         <div class="slide active">
-            <div class="slide-number">1 / 3</div>
+            <div class="slide-number">1 / 5</div>
             <div class="slide-header">
-                <h1 class="slide-title">Ignis Divinus</h1>
-                <p class="slide-subtitle">Real-time 3D Fire Simulation</p>
+                <h1 class="slide-title">4.3 Presentation Tips</h1>
+                <p class="slide-subtitle">Guidelines for an Effective Presentation</p>
             </div>
             <div class="slide-content">
-                <p style="text-align: center; font-size: 1.3rem; margin-bottom: 40px;">
-                    <strong>Objective:</strong> Physically-based fire simulation with real-time performance
-                </p>
-                
-                <div style="margin-bottom: 40px;">
-                    <h3 style="color: #ffcc00; margin-bottom: 20px;">Key Features</h3>
-                    <ul style="font-size: 1.1rem;">
-                        <li>3D Navier-Stokes fluid dynamics</li>
-                        <li>Volume rendering with blackbody radiation</li>
-                        <li>GPU acceleration via Taichi</li>
-                        <li>Interactive visualization with real-time controls</li>
+                <ul class="tips-list">
+                    <li>
+                        <strong><span class="emoji-icon">🌟</span> Present Your Best First</strong>
+                        Present your best, most exciting results first, in case you run out of time.
+                    </li>
+                    <li>
+                        <strong><span class="emoji-icon">📍</span> One Major Point Per Slide</strong>
+                        1 major point per slide. Put the point in the slide title.
+                    </li>
+                    <li>
+                        <strong><span class="emoji-icon">🖼️</span> Visual Communication</strong>
+                        Pictures tell a thousand words - make your slides visually rich!
+                    </li>
+                    <li>
+                        <strong><span class="emoji-icon">📝</span> Text Guidelines</strong>
+                        For text, use short bullets, large font, and elaborate in voice-over.
+                    </li>
+                    <li>
+                        <strong><span class="emoji-icon">✨</span> Clarity Over Quantity</strong>
+                        Strive to be clear and engaging instead of packing in as much information as possible.
+                    </li>
+                    <li>
+                        <strong><span class="emoji-icon">🔕</span> Minimize Distractions</strong>
+                        Turn on do not disturb.
+                    </li>
+                    <li>
+                        <strong><span class="emoji-icon">🎉</span> Enjoy the Moment</strong>
+                        Have fun!
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 2: Format for Professor Elaydi -->
+        <div class="slide">
+            <div class="slide-number">2 / 5</div>
+            <div class="slide-header">
+                <h1 class="slide-title">4.4 Suggested Format for Professor Elaydi</h1>
+                <p class="slide-subtitle">1.5-Minute Presentation Guidelines</p>
+            </div>
+            <div class="slide-content">
+                <div class="format-section">
+                    <h3>Quick Overview Format</h3>
+                    <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
+                        For the 1.5-min presentation for Professor Elaydi, we suggest:
+                    </p>
+                    <ul class="tips-list">
+                        <li>
+                            <strong>Background Context</strong>
+                            Give a bit of background about your project and its motivation
+                        </li>
+                        <li>
+                            <strong>Highlight Final Results</strong>
+                            Highlight the demo final results/findings of your project
+                        </li>
+                        <li>
+                            <strong>Keep it Concise</strong>
+                            Focus on the most impactful aspects of your work
+                        </li>
                     </ul>
                 </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Format for TAs - Part 1 -->
+        <div class="slide">
+            <div class="slide-number">3 / 5</div>
+            <div class="slide-header">
+                <h1 class="slide-title">4.5 Suggested Format for TAs</h1>
+                <p class="slide-subtitle">5-Minute Presentation Structure</p>
+            </div>
+            <div class="slide-content">
+                <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">
+                    Your presentation style is totally up to you! Here is a suggested format:
+                </p>
                 
-                <div class="team-intro">
-                    <div class="team-member-card">
-                        <h4 style="color: #ff6b35;">Chenyang Zhang</h4>
-                        <p>Pressure Solver & Algorithms</p>
+                <div class="format-section">
+                    <div class="timeline-item">
+                        <span class="timeline-time">15 sec</span>
+                        <div class="timeline-content">
+                            <h4>Title Slide</h4>
+                            <p>Engaging title, iconic graphic, team member names.</p>
+                            <p style="margin-top: 10px; font-style: italic;">
+                                Example: "We built a GPU-accelerated smoke simulator that you can 'blow' around interactively" or 
+                                "We tried to implement Metropolis light transport, but it was hard! So we switched to photon mapping, 
+                                and rendered caustics at the bottom of a swimming pool."
+                            </p>
+                        </div>
                     </div>
-                    <div class="team-member-card">
-                        <h4 style="color: #ff6b35;">Huachen Qu</h4>
-                        <p>Volume Renderer & Blackbody</p>
+
+                    <div class="timeline-item">
+                        <span class="timeline-time">30 sec</span>
+                        <div class="timeline-content">
+                            <h4>Background and Intro</h4>
+                            <p>Provide the background on your project. Why did you choose this project? 
+                            What problem did you solve, and why does it matter?</p>
+                            <p style="margin-top: 10px;">Describe succinctly but clearly what your code starting point was.</p>
+                        </div>
                     </div>
-                    <div class="team-member-card">
-                        <h4 style="color: #ff6b35;">Muze Du</h4>
-                        <p>Fluid3D & Post-Processing</p>
-                    </div>
-                    <div class="team-member-card">
-                        <h4 style="color: #ff6b35;">Yijun Xiang</h4>
-                        <p>System Architecture & GPU</p>
+
+                    <div class="timeline-item">
+                        <span class="timeline-time">30 sec</span>
+                        <div class="timeline-content">
+                            <h4>Demo / Final Results Teaser</h4>
+                            <p>Start by showing off a live demo, or final images, of your best results. 
+                            Explain what is cool / hard about it, what's unique to your project, 
+                            what we should pay attention to, what you are proud of.</p>
+                            <p style="margin-top: 10px; color: #ffcc00;">
+                                <strong>Why?</strong> This acts as motivation for your technical material, 
+                                and makes sure that you don't run out of time to show your results!
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 2: Technical Implementation -->
+        <!-- Slide 4: Format for TAs - Part 2 -->
         <div class="slide">
-            <div class="slide-number">2 / 3</div>
+            <div class="slide-number">4 / 5</div>
             <div class="slide-header">
-                <h1 class="slide-title">System Architecture & Current Progress</h1>
+                <h1 class="slide-title">4.5 Suggested Format for TAs (Continued)</h1>
+                <p class="slide-subtitle">Technical Details and Conclusion</p>
             </div>
             <div class="slide-content">
-                <h3 style="color: #ffcc00; text-align: center; margin-bottom: 30px;">Pipeline Overview</h3>
-                
-                <div class="pipeline-diagram">
-                    <div class="pipeline-step">
-                        <h4 style="color: #ff6b35;">Fluid Grid</h4>
-                        <p>96³ voxels (High)</p>
+                <div class="format-section">
+                    <div class="timeline-item">
+                        <span class="timeline-time">1-1.5 min</span>
+                        <div class="timeline-content">
+                            <h4>Technical Approach and Implementation</h4>
+                            <p>Illustrate and describe clearly what you built on top of your starter code. 
+                            One engaging way to do this is to demo modules of your project, with key intermediate results.</p>
+                            <p style="margin-top: 10px; color: #ffcc00;">
+                                It is wise to highlight what you did that was unique.
+                            </p>
+                        </div>
                     </div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step">
-                        <h4 style="color: #ff6b35;">Simulation</h4>
-                        <p>Semi-Lagrangian<br>Jacobi Solver<br>Buoyancy</p>
+
+                    <div class="timeline-item">
+                        <span class="timeline-time">0.5-1 min</span>
+                        <div class="timeline-content">
+                            <h4>More Results</h4>
+                            <p>More show and tell - demonstrate additional features, variations, or interesting findings.</p>
+                        </div>
                     </div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step">
-                        <h4 style="color: #ff6b35;">Rendering</h4>
-                        <p>256-step Ray March<br>800-3000K LUT</p>
-                    </div>
-                    <span class="pipeline-arrow">→</span>
-                    <div class="pipeline-step">
-                        <h4 style="color: #ff6b35;">Post-FX</h4>
-                        <p>Bloom<br>Heat Refraction<br>Tone Mapping</p>
+
+                    <div class="timeline-item">
+                        <span class="timeline-time">15-30 sec</span>
+                        <div class="timeline-content">
+                            <h4>Conclusion</h4>
+                            <p>Summarize top lessons learned, and/or compliment your team mates.</p>
+                            <p style="margin-top: 10px; color: #ffcc00; font-weight: bold;">
+                                Finish positive and optimistic!
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                <h3 style="color: #ffcc00; text-align: center; margin: 40px 0 20px;">Performance Metrics</h3>
-                
-                <table class="performance-table">
-                    <tr>
-                        <th>Quality Level</th>
-                        <th>Grid Size</th>
-                        <th>Ray Steps</th>
-                        <th>Performance</th>
-                    </tr>
-                    <tr>
-                        <td>Low</td>
-                        <td>64³</td>
-                        <td>128</td>
-                        <td class="highlight">120+ FPS</td>
-                    </tr>
-                    <tr>
-                        <td>Medium</td>
-                        <td>80³</td>
-                        <td>192</td>
-                        <td class="highlight">60+ FPS</td>
-                    </tr>
-                    <tr>
-                        <td>High</td>
-                        <td>96³</td>
-                        <td>256</td>
-                        <td class="highlight">30+ FPS</td>
-                    </tr>
-                    <tr>
-                        <td>Ultra</td>
-                        <td>128³</td>
-                        <td>384</td>
-                        <td class="highlight">15+ FPS</td>
-                    </tr>
-                </table>
             </div>
         </div>
 
-        <!-- Slide 3: Achievements & Next Steps -->
+        <!-- Slide 5: Demo Videos -->
         <div class="slide">
-            <div class="slide-number">3 / 3</div>
+            <div class="slide-number">5 / 5</div>
             <div class="slide-header">
-                <h1 class="slide-title">Current Status & Future Work</h1>
+                <h1 class="slide-title">Project Demo Videos</h1>
+                <p class="slide-subtitle">Ignis Divinus Features Showcase</p>
             </div>
             <div class="slide-content">
-                <h3 style="color: #4CAF50; margin-bottom: 30px;">Completed ✓</h3>
-                
-                <div class="achievements-list">
-                    <div class="achievement-item">
-                        <span class="achievement-icon">✓</span>
-                        <div>
-                            <strong>Stable 3D fluid solver</strong> with Semi-Lagrangian advection
-                        </div>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <h4>🔥 Original Demo</h4>
+                        <p>Complete fire simulation demonstration</p>
+                        <a href="https://drive.google.com/file/d/1TM0uOEL8jqAPwqdKahGFElPPGDpws415/view?usp=drive_link" 
+                           target="_blank" class="video-link">Watch Original Video</a>
                     </div>
-                    <div class="achievement-item">
-                        <span class="achievement-icon">✓</span>
-                        <div>
-                            <strong>Realistic flame colors</strong> via blackbody radiation (800K-3000K)
-                        </div>
+                    
+                    <div class="video-card">
+                        <h4>💨 Wind Feature</h4>
+                        <p>Interactive wind control demonstration</p>
+                        <a href="https://drive.google.com/file/d/1tJEwspYKYJPtIumK5Yj0RRJl-UWznE2y/view?usp=drive_link" 
+                           target="_blank" class="video-link">Watch Wind Demo</a>
                     </div>
-                    <div class="achievement-item">
-                        <span class="achievement-icon">✓</span>
-                        <div>
-                            <strong>Heat refraction</strong> and post-processing effects
-                        </div>
+                    
+                    <div class="video-card">
+                        <h4>🎨 Color Feature</h4>
+                        <p>Dynamic color temperature control</p>
+                        <a href="https://drive.google.com/file/d/1rKN1N3pssSJBLhXDeUkdsP1eF4D4Y_-O/view?usp=drive_link" 
+                           target="_blank" class="video-link">Watch Color Demo</a>
                     </div>
-                    <div class="achievement-item">
-                        <span class="achievement-icon">✓</span>
-                        <div>
-                            <strong>Performance monitoring</strong> and optimization system
-                        </div>
-                    </div>
-                </div>
-
-                <h3 style="color: #ff6b35; margin: 40px 0 30px;">In Progress 🔄</h3>
-                
-                <div class="next-steps-grid">
-                    <div class="next-step-card">
-                        <h4 style="color: #ffcc00;">Turbulence</h4>
-                        <p>Vorticity confinement for enhanced detail</p>
-                    </div>
-                    <div class="next-step-card">
-                        <h4 style="color: #ffcc00;">Particles</h4>
-                        <p>Smoke system and sparks integration</p>
-                    </div>
-                    <div class="next-step-card">
-                        <h4 style="color: #ffcc00;">Optimization</h4>
-                        <p>Adaptive resolution techniques</p>
+                    
+                    <div class="video-card">
+                        <h4>💥 Burst Feature</h4>
+                        <p>Explosive burst effects showcase</p>
+                        <a href="https://drive.google.com/file/d/1liFU2lPlnSUI7kXXoyN_3H_nHcHTUaA8/view?usp=drive_link" 
+                           target="_blank" class="video-link">Watch Burst Demo</a>
                     </div>
                 </div>
-
-                <div class="demo-screenshots">
-                    <div class="screenshot">
-                        <img src="https://via.placeholder.com/400x300/000000/ff6b35?text=3D+Flame" alt="3D Flame">
-                        <div class="screenshot-caption">Volumetric Flame Rendering</div>
-                    </div>
-                    <div class="screenshot">
-                        <img src="https://via.placeholder.com/400x300/000000/ffcc00?text=Heat+Effects" alt="Heat Effects">
-                        <div class="screenshot-caption">Heat Refraction & Bloom</div>
-                    </div>
+                
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: rgba(255, 107, 53, 0.1); border-radius: 15px;">
+                    <h3 style="color: #ffcc00; margin-bottom: 15px;">Ready to Present!</h3>
+                    <p style="font-size: 1.2rem;">Use these guidelines to deliver an engaging and memorable presentation.</p>
+                    <p style="margin-top: 15px; font-size: 1.1rem; color: #ff6b35;">Remember: Have fun and be proud of your work!</p>
                 </div>
             </div>
         </div>
