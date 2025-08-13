@@ -644,11 +644,19 @@
         <section id="results">
             <h2>Results</h2>
             
+            <h3>Demo Video</h3>
+            <div class="video-container">
+                <iframe src="https://drive.google.com/file/d/1DYp5ZlH3U0DpFxJQEXef2onEMBGBQo66/preview" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; color: #999; margin: 20px 0 40px;">
+                Full demonstration showcasing wind effects, color variations, explosion dynamics, and real-time parameter controls
+            </p>
+            
             <h3>Fire Simulation Showcase</h3>
             <div style="text-align: center; margin: 40px 0;">
                 <img src="assets/small-blast.gif" alt="Clean Arcane Blast" style="width: 100%; max-width: 800px; border-radius: 15px; box-shadow: 0 20px 60px rgba(138, 43, 226, 0.4);">
                 <div style="margin-top: 30px; padding: 30px; background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(255, 107, 53, 0.1)); border-radius: 15px; border: 2px solid rgba(138, 43, 226, 0.3);">
-                    <h4 style="font-size: 2rem; margin-bottom: 20px; background: linear-gradient(90deg, #8A2BE2, #FF6B35, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🔥 CLEAN ARCANE BLAST</h4>
+                    <h4 style="font-size: 2rem; margin-bottom: 20px; background: linear-gradient(90deg, #8A2BE2, #FF6B35, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🔥 CLEAN ARCANE BLAST</h4>
                     <p style="font-size: 1.1rem; line-height: 1.8;">
                         A refined 5-second demonstration of our fire simulation system with reduced noise and smoother transitions. 
                         Features controlled explosions with elegant color transitions through 7 distinct colors - 
@@ -673,7 +681,11 @@
             </div>
             
             <p style="text-align: center; margin-top: 30px; font-style: italic; color: #999;">
-                Additional demonstrations including wind effects, individual color variations, and technical breakdowns are available in the accompanying video presentation.
+                The video above demonstrates comprehensive features including:
+                • Dynamic wind effects and directional control
+                • Individual color variations through temperature mapping
+                • Technical parameter adjustments in real-time
+                • Multiple explosion patterns and intensities
             </p>
             
             <div class="metrics-grid">
@@ -700,25 +712,6 @@
                 <div class="metric-card">
                     <div class="metric-value">6x</div>
                     <div class="metric-label">Performance Gain</div>
-                </div>
-            </div>
-
-            <h3>Core Simulation Features</h3>
-            <div class="results-grid">
-                <div class="result-item">
-                    <img src="assets/flame-simulation.gif" alt="Volumetric Flame">
-                    <div class="result-caption">
-                        <h4>Volumetric Flame Rendering</h4>
-                        <p>Ray-marched volume with physically-based emission and absorption, creating realistic density variations and color gradients.</p>
-                    </div>
-                </div>
-                
-                <div class="result-item">
-                    <img src="assets/small-blast.gif" alt="Clean Blast Effect">
-                    <div class="result-caption">
-                        <h4>Controlled Explosion Effects</h4>
-                        <p>Precisely timed explosions with smooth color transitions, demonstrating the system's ability to create dramatic yet controlled fire effects.</p>
-                    </div>
                 </div>
             </div>
 
@@ -768,51 +761,51 @@
                 </p>
                 
                 <div class="member-contribution">
+                    <div class="member-name">Yijun Xiang</div>
+                    <div class="contribution-list">
+                        <span class="contribution-tag">Fluid Simulation Architecture</span>
+                        <span class="contribution-tag">Semi-Lagrangian Advection</span>
+                        <span class="contribution-tag">GPU Kernel Optimization</span>
+                        <span class="contribution-tag">Adaptive Time Stepping</span>
+                        <span class="contribution-tag">Documentation & Testing</span>
+                    </div>
+                    <p>Architected the core fluid simulation framework with stable Semi-Lagrangian advection. Optimized GPU kernels achieving 6x speedup through memory coalescing and kernel fusion. Implemented adaptive CFL-based time stepping for stability and led project documentation efforts.</p>
+                </div>
+                
+                <div class="member-contribution">
                     <div class="member-name">Chenyang Zhang</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">Fluid Simulation Core</span>
-                        <span class="contribution-tag">Navier-Stokes Solver</span>
-                        <span class="contribution-tag">Advection Schemes</span>
+                        <span class="contribution-tag">Navier-Stokes Implementation</span>
+                        <span class="contribution-tag">Pressure Solver Design</span>
                         <span class="contribution-tag">Boundary Conditions</span>
-                        <span class="contribution-tag">Performance Profiling</span>
+                        <span class="contribution-tag">Vorticity Confinement</span>
+                        <span class="contribution-tag">Algorithm Research</span>
                     </div>
-                    <p>Implemented the core fluid dynamics solver including Semi-Lagrangian advection, pressure projection, and temperature-driven buoyancy. Optimized simulation kernels for GPU execution.</p>
+                    <p>Implemented the incompressible Navier-Stokes solver with Jacobi pressure projection. Designed boundary condition system for realistic flame-ground interaction. Added vorticity confinement for turbulent detail preservation and conducted extensive algorithm research and validation.</p>
                 </div>
                 
                 <div class="member-contribution">
                     <div class="member-name">Huachen Qu</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">Volume Rendering</span>
-                        <span class="contribution-tag">Ray Marching</span>
+                        <span class="contribution-tag">Volume Rendering System</span>
+                        <span class="contribution-tag">Ray Marching Pipeline</span>
                         <span class="contribution-tag">Blackbody Radiation</span>
-                        <span class="contribution-tag">Shader Optimization</span>
-                        <span class="contribution-tag">Color Mapping</span>
+                        <span class="contribution-tag">Color Mapping LUT</span>
+                        <span class="contribution-tag">Visual Quality Tuning</span>
                     </div>
-                    <p>Developed the volumetric rendering pipeline with physically-based emission model. Implemented adaptive ray marching and optimized shader performance for real-time rendering.</p>
+                    <p>Developed the complete volumetric rendering pipeline with adaptive ray marching. Implemented physically-accurate blackbody radiation model with temperature-to-color lookup tables. Optimized visual quality through emission-absorption modeling and extensive parameter tuning.</p>
                 </div>
                 
                 <div class="member-contribution">
                     <div class="member-name">Muze Du</div>
                     <div class="contribution-list">
                         <span class="contribution-tag">Post-processing Effects</span>
-                        <span class="contribution-tag">Heat Refraction</span>
-                        <span class="contribution-tag">Bloom Implementation</span>
-                        <span class="contribution-tag">UI/UX Design</span>
-                        <span class="contribution-tag">Parameter Tuning</span>
-                    </div>
-                    <p>Created post-processing pipeline including bloom and heat distortion effects. Designed and implemented the interactive GUI system with real-time parameter adjustment.</p>
-                </div>
-                
-                <div class="member-contribution">
-                    <div class="member-name">Yijun Xiang</div>
-                    <div class="contribution-list">
-                        <span class="contribution-tag">Taichi Framework</span>
-                        <span class="contribution-tag">GPU Optimization</span>
-                        <span class="contribution-tag">Performance Monitoring</span>
-                        <span class="contribution-tag">Documentation</span>
+                        <span class="contribution-tag">Heat Refraction Shader</span>
+                        <span class="contribution-tag">Interactive Controls</span>
+                        <span class="contribution-tag">User Interface Design</span>
                         <span class="contribution-tag">Video Production</span>
                     </div>
-                    <p>Integrated Taichi framework for GPU acceleration, implemented performance monitoring tools, and created project documentation. Produced demonstration videos and presentation materials.</p>
+                    <p>Created comprehensive post-processing pipeline including bloom and heat distortion effects. Designed intuitive GUI for real-time parameter control and mode switching. Led video production and demonstration creation showcasing all system features and capabilities.</p>
                 </div>
             </div>
         </section>
@@ -828,21 +821,22 @@
                 
                 <div class="reference-item">
                     [2] Fedkiw, Ronald, Jos Stam, and Henrik Wann Jensen. "Visual Simulation of Smoke." SIGGRAPH 2001.
-                    <a href="https://graphics.stanford.edu/papers/smoke/" target="_blank">Paper</a>
+                    <a href="https://web.stanford.edu/class/cs237d/smoke.pdf" target="_blank">Paper</a>
                 </div>
                 
                 <div class="reference-item">
                     [3] Nguyen, Duc Quang, Ronald Fedkiw, and Henrik Wann Jensen. "Physically Based Modeling and Animation of Fire." SIGGRAPH 2002.
-                    <a href="https://graphics.stanford.edu/papers/fire/" target="_blank">Paper</a>
+                    <a href="https://physbam.stanford.edu/~fedkiw/papers/stanford2002-01.pdf" target="_blank">Paper</a>
                 </div>
                 
                 <div class="reference-item">
-                    [4] Bridson, Robert. "Fluid Simulation for Computer Graphics." A K Peters/CRC Press, 2015.
-                    <a href="https://www.cs.ubc.ca/~rbridson/fluidsimulation/" target="_blank">Book</a>
+                    [4] Bridson, Robert. "Fluid Simulation for Computer Graphics." CRC Press, 2015.
+                    <a href="https://www.cs.ubc.ca/~rbridson/fluidsimulation/" target="_blank">Book Website</a>
                 </div>
                 
                 <div class="reference-item">
-                    [5] Wrenninge, Magnus. "Production Volume Rendering: Design and Implementation." A K Peters/CRC Press, 2012.
+                    [5] Wrenninge, Magnus and Nafees Bin Zafar. "Volumetric Methods in Visual Effects." SIGGRAPH 2010 Course.
+                    <a href="https://dl.acm.org/doi/10.1145/1837101.1837132" target="_blank">ACM Digital Library</a>
                 </div>
                 
                 <div class="reference-item">
@@ -856,35 +850,12 @@
                 </div>
                 
                 <div class="reference-item">
-                    [8] Planck, Max. "The Theory of Heat Radiation." Dover Publications, 1959. (Blackbody radiation theory)
+                    [8] Foster, Nick and Dimitri Metaxas. "Realistic Animation of Liquids." Graphical Models and Image Processing, 1996.
+                    <a href="https://www.cs.unc.edu/~lin/COMP768-F07/LEC/fosternick96.pdf" target="_blank">PDF</a>
                 </div>
             </div>
         </section>
 
-        <section id="media">
-            <h2>Final Presentation</h2>
-            
-            <h3>Demo Video</h3>
-            <div class="video-container">
-                <iframe src="https://drive.google.com/file/d/1YourFinalVideoID/preview" allowfullscreen></iframe>
-            </div>
-            <p style="text-align: center; color: #999; margin-top: 20px;">
-                Final project demonstration showcasing all implemented features and real-time interaction
-            </p>
-            
-            <h3>Project Repository</h3>
-            <div class="card" style="text-align: center; background: rgba(74, 144, 226, 0.1); border-color: var(--accent-blue);">
-                <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                    Full source code, documentation, and build instructions available on GitHub:
-                </p>
-                <a href="https://github.com/yourusername/ignis-divinus" 
-                   style="display: inline-block; padding: 15px 30px; background: var(--accent-blue); color: white; text-decoration: none; border-radius: 30px; font-weight: bold; transition: all 0.3s ease;"
-                   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(74, 144, 226, 0.5)';"
-                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                    View on GitHub →
-                </a>
-            </div>
-        </section>
     </main>
 
     <footer>
