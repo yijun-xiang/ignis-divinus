@@ -516,8 +516,9 @@
 
     <header>
         <a href="index.html" class="back-link">← Back to Home</a>
-        <h1 class="title"><a href="https://yijun-xiang.github.io/ignis-divinus/final.html" style="text-decoration: none; color: inherit;">Ignis Divinus</a></h1>
+        <h1 class="title">Ignis Divinus</h1>
         <p class="subtitle">Final Report</p>
+        <p style="color: #999; margin-top: 10px; font-size: 0.9rem;">https://yijun-xiang.github.io/ignis-divinus/final.html</p>
         <p style="color: #999; margin-top: 20px;">Real-time 3D Fire Simulation - CS 184 Summer 2025</p>
         <div class="team">
             <div class="team-member">Chenyang Zhang</div>
@@ -736,49 +737,49 @@
                 <div class="member-contribution">
                     <div class="member-name">Yijun Xiang</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">Fluid Simulation Architecture</span>
-                        <span class="contribution-tag">Semi-Lagrangian Advection</span>
-                        <span class="contribution-tag">GPU Kernel Optimization</span>
-                        <span class="contribution-tag">Adaptive Time Stepping</span>
-                        <span class="contribution-tag">Documentation & Testing</span>
+                        <span class="contribution-tag">Main System Architecture</span>
+                        <span class="contribution-tag">Taichi GPU Framework</span>
+                        <span class="contribution-tag">Performance Optimization</span>
+                        <span class="contribution-tag">Adaptive Timestep Control</span>
+                        <span class="contribution-tag">Project Integration</span>
                     </div>
-                    <p>Architected the core fluid simulation framework with stable Semi-Lagrangian advection. Optimized GPU kernels achieving 6x speedup through memory coalescing and kernel fusion. Implemented adaptive CFL-based time stepping for stability and led project documentation efforts.</p>
+                    <p>Designed main.py architecture integrating all subsystems. Led Taichi GPU framework implementation achieving 30+ FPS at 96³ resolution. Developed adaptive timestep control and performance monitoring system. Coordinated module integration and project structure.</p>
                 </div>
                 
                 <div class="member-contribution">
                     <div class="member-name">Chenyang Zhang</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">Navier-Stokes Implementation</span>
-                        <span class="contribution-tag">Pressure Solver Design</span>
-                        <span class="contribution-tag">Boundary Conditions</span>
-                        <span class="contribution-tag">Vorticity Confinement</span>
-                        <span class="contribution-tag">Algorithm Research</span>
+                        <span class="contribution-tag">Fluid3D Core Implementation</span>
+                        <span class="contribution-tag">Velocity-Pressure Solver</span>
+                        <span class="contribution-tag">Buoyancy Forces</span>
+                        <span class="contribution-tag">Fuel Combustion Model</span>
+                        <span class="contribution-tag">Dissipation Systems</span>
                     </div>
-                    <p>Implemented the incompressible Navier-Stokes solver with Jacobi pressure projection. Designed boundary condition system for realistic flame-ground interaction. Added vorticity confinement for turbulent detail preservation and conducted extensive algorithm research and validation.</p>
+                    <p>Implemented Fluid3D class with velocity, density, and temperature fields. Developed Jacobi pressure solver with 80 iterations for stability. Created buoyancy-driven motion with fuel combustion timing. Designed per-second dissipation rates for realistic flame behavior.</p>
                 </div>
                 
                 <div class="member-contribution">
                     <div class="member-name">Huachen Qu</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">Volume Rendering System</span>
-                        <span class="contribution-tag">Ray Marching Pipeline</span>
-                        <span class="contribution-tag">Blackbody Radiation</span>
-                        <span class="contribution-tag">Color Mapping LUT</span>
-                        <span class="contribution-tag">Visual Quality Tuning</span>
+                        <span class="contribution-tag">VolumeRenderer Class</span>
+                        <span class="contribution-tag">Blackbody LUT System</span>
+                        <span class="contribution-tag">Ray Marching Algorithm</span>
+                        <span class="contribution-tag">Emission-Absorption Model</span>
+                        <span class="contribution-tag">Flame Color Control</span>
                     </div>
-                    <p>Developed the complete volumetric rendering pipeline with adaptive ray marching. Implemented physically-accurate blackbody radiation model with temperature-to-color lookup tables. Optimized visual quality through emission-absorption modeling and extensive parameter tuning.</p>
+                    <p>Built VolumeRenderer with 256-step ray marching and blackbody radiation LUT (800-3000K). Implemented emission scale and absorption coefficients for volumetric effects. Added dynamic flame tinting system for color variations during runtime.</p>
                 </div>
                 
                 <div class="member-contribution">
                     <div class="member-name">Muze Du</div>
                     <div class="contribution-list">
-                        <span class="contribution-tag">Shader Programming</span>
-                        <span class="contribution-tag">Screen-Space Effects</span>
-                        <span class="contribution-tag">Heat Refraction Algorithm</span>
-                        <span class="contribution-tag">Bloom Implementation</span>
-                        <span class="contribution-tag">Real-time Parameter System</span>
+                        <span class="contribution-tag">HeatRefraction Class</span>
+                        <span class="contribution-tag">PostProcessor Pipeline</span>
+                        <span class="contribution-tag">Screen-Space Distortion</span>
+                        <span class="contribution-tag">Temporal Filtering</span>
+                        <span class="contribution-tag">ImGui Integration</span>
                     </div>
-                    <p>Implemented advanced post-processing shaders including screen-space heat refraction using displacement mapping. Developed multi-pass bloom algorithm with Gaussian blur kernels. Created real-time parameter interpolation system for smooth transitions and integrated Dear ImGui for technical controls.</p>
+                    <p>Created HeatRefraction effect with temperature gradient calculation and screen-space projection. Built PostProcessor with bloom and exposure control. Implemented temporal filtering (0.85 strength) for smooth refraction. Integrated Dear ImGui for real-time parameter adjustment.</p>
                 </div>
             </div>
         </section>
