@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Report - Ignis Divinus</title>
+    <title>Ignis Divinus - Presentation Slides</title>
     <style>
         * {
             margin: 0;
@@ -11,233 +11,295 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --fire-orange: #ff6b35;
-            --fire-yellow: #ffcc00;
-            --fire-red: #c41e3a;
-            --smoke-gray: #2a2a2a;
-            --bg-dark: #0a0a0a;
-            --text-light: #f0f0f0;
-            --accent-blue: #4a90e2;
-            --success-green: #4CAF50;
-            --purple-accent: #9b59b6;
-        }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .fire-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0f0f 50%, #0a0a0a 100%);
-            z-index: -1;
-        }
-
-        .fire-particles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
+            background: #0a0a0a;
+            color: #f0f0f0;
             overflow: hidden;
-            z-index: -1;
         }
 
-        .particle {
-            position: absolute;
-            bottom: -10px;
-            background: radial-gradient(circle, var(--fire-yellow) 0%, var(--fire-orange) 50%, transparent 70%);
-            border-radius: 50%;
-            animation: float-up 4s infinite ease-out;
-            opacity: 0;
-        }
-
-        @keyframes float-up {
-            0% {
-                transform: translateY(0) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--fire-yellow);
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% {
-                text-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-            }
-            50% {
-                text-shadow: 0 0 30px rgba(255, 204, 0, 0.8),
-                           0 0 40px rgba(255, 107, 53, 0.6);
-            }
-        }
-
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+        .slideshow-container {
             position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .title {
-            font-size: 3.5rem;
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            padding: 60px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0f0f 100%);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 40px;
+            z-index: 1;
+        }
+
+        .slide-title {
+            font-size: 3rem;
             font-weight: 900;
-            background: linear-gradient(45deg, var(--fire-orange), var(--fire-yellow), var(--fire-red));
+            background: linear-gradient(45deg, #ff6b35, #ffcc00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: fire-glow 2s ease-in-out infinite alternate;
             margin-bottom: 20px;
         }
 
-        @keyframes fire-glow {
-            from {
-                text-shadow: 0 0 20px rgba(255, 107, 53, 0.5),
-                           0 0 40px rgba(255, 107, 53, 0.3),
-                           0 0 60px rgba(255, 107, 53, 0.1);
-            }
-            to {
-                text-shadow: 0 0 30px rgba(255, 204, 0, 0.7),
-                           0 0 50px rgba(255, 204, 0, 0.5),
-                           0 0 70px rgba(255, 204, 0, 0.3);
-            }
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
+        .slide-subtitle {
+            font-size: 1.5rem;
             color: #ccc;
-            max-width: 800px;
-            margin: 0 auto 40px;
         }
 
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: var(--fire-orange);
-            text-decoration: none;
-            font-weight: bold;
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .team-intro {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
             transition: all 0.3s ease;
+        }
+
+        .team-member-card:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .pipeline-diagram {
             display: flex;
             align-items: center;
-            gap: 5px;
-        }
-
-        .back-link:hover {
-            color: var(--fire-yellow);
-            transform: translateX(-5px);
-        }
-
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
+            justify-content: space-around;
+            margin: 40px 0;
             flex-wrap: wrap;
         }
 
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
+        .pipeline-step {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            flex: 1;
+            margin: 10px;
+            min-width: 200px;
             transition: all 0.3s ease;
+        }
+
+        .pipeline-step:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: scale(1.05);
+        }
+
+        .pipeline-arrow {
+            font-size: 2rem;
+            color: #ff6b35;
+            margin: 0 20px;
+        }
+
+        .performance-table {
+            margin: 40px auto;
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .performance-table th,
+        .performance-table td {
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .performance-table th {
+            background: rgba(255, 107, 53, 0.2);
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        .performance-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .achievements-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: translateX(10px);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            color: #4CAF50;
+        }
+
+        .next-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .next-step-card {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .next-step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .demo-screenshots {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .screenshot {
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
             position: relative;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--fire-orange);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
+        .screenshot img {
             width: 100%;
+            height: auto;
+            display: block;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .screenshot-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            text-align: center;
+            color: #ffcc00;
         }
 
-        section {
-            padding: 80px 0;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .nav-btn {
+            background: rgba(255, 107, 53, 0.8);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            background: linear-gradient(90deg, var(--fire-orange), var(--fire-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .nav-btn:hover {
+            background: #ff6b35;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
         }
 
-        h3 {
-            font-size: 1.8rem;
-            margin: 30px 0 20px;
-            color: var(--fire-yellow);
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        h4 {
-            font-size: 1.4rem;
-            margin: 20px 0 15px;
-            color: var(--fire-orange);
-        }
-
-        p, li {
-            margin-bottom: 15px;
-            color: #ddd;
-            line-height: 1.8;
+        .slide-number {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #ff6b35;
         }
 
         ul {
@@ -245,731 +307,264 @@
             padding-left: 0;
         }
 
-        li::before {
-            content: "▸ ";
-            color: var(--fire-orange);
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .abstract-card {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 204, 0, 0.05));
-            border: 2px solid var(--fire-orange);
-            padding: 40px;
-            margin: 40px 0;
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .abstract-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 204, 0, 0.1) 0%, transparent 70%);
-            animation: rotate-glow 10s linear infinite;
-        }
-
-        @keyframes rotate-glow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            margin: 30px 0;
-            background: #000;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .showcase-gif {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
-            margin: 30px 0;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .result-item {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .result-item:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
-        }
-
-        .result-item img, .result-item video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .result-caption {
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .metric-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .metric-label {
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        .technique-comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 30px 0;
-        }
-
-        .technique-box {
-            padding: 25px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .technique-box.before {
-            background: rgba(255, 107, 53, 0.1);
-            border: 2px solid rgba(255, 107, 53, 0.3);
-        }
-
-        .technique-box.after {
-            background: rgba(76, 175, 80, 0.1);
-            border: 2px solid var(--success-green);
-        }
-
-        .contributions-section {
-            background: rgba(155, 89, 182, 0.05);
-            border: 2px solid var(--purple-accent);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px 0;
-        }
-
-        .member-contribution {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid var(--fire-orange);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 0 10px 10px 0;
-        }
-
-        .member-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--fire-yellow);
+        li {
             margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
         }
 
-        .contribution-list {
-            display: grid;
-            gap: 10px;
+        li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ff6b35;
+            font-weight: bold;
         }
 
-        .contribution-tag {
-            display: inline-block;
-            background: rgba(255, 204, 0, 0.1);
-            border: 1px solid rgba(255, 204, 0, 0.3);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-
-        .team {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .team-member {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px 25px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .team-member:hover {
-            background: rgba(255, 107, 53, 0.1);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-        }
-
-        .references {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 40px 0;
-        }
-
-        .reference-item {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .reference-item:last-child {
-            border-bottom: none;
-        }
-
-        .reference-item a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .reference-item a:hover {
-            color: var(--fire-orange);
-        }
-
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-top: 1px solid rgba(255, 107, 53, 0.3);
-            color: #666;
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
         }
 
         @media (max-width: 768px) {
-            .title {
-                font-size: 2.5rem;
+            .slide {
+                padding: 30px;
             }
             
-            h2 {
-                font-size: 1.8rem;
+            .slide-title {
+                font-size: 2rem;
             }
             
-            nav ul {
-                gap: 20px;
-            }
-            
-            .technique-comparison {
+            .team-intro,
+            .achievements-list,
+            .next-steps-grid,
+            .demo-screenshots {
                 grid-template-columns: 1fr;
             }
             
-            .results-grid {
-                grid-template-columns: 1fr;
+            .pipeline-diagram {
+                flex-direction: column;
+            }
+            
+            .pipeline-arrow {
+                transform: rotate(90deg);
             }
         }
     </style>
 </head>
 <body>
-    <div class="fire-bg"></div>
-    <div class="fire-particles" id="particles"></div>
-
-    <header>
-        <a href="index.html" class="back-link">← Back to Home</a>
-        <h1 class="title">Ignis Divinus</h1>
-        <p class="subtitle">Final Report</p>
-        <div style="margin-top: 15px; padding: 10px 20px; background: rgba(255, 107, 53, 0.1); border: 1px solid var(--fire-orange); border-radius: 10px; display: inline-block;">
-            <p style="color: var(--fire-yellow); font-size: 1rem; font-weight: bold; letter-spacing: 0.5px;">
-                https://yijun-xiang.github.io/ignis-divinus/final.html
-            </p>
+    <div class="slideshow-container">
+        <!-- Slide 1: Title & Team -->
+        <div class="slide active">
+            <div class="slide-number">1 / 3</div>
+            <div class="slide-header">
+                <h1 class="slide-title">Ignis Divinus</h1>
+                <p class="slide-subtitle">Real-time 3D Fire Simulation</p>
+            </div>
+            <div class="slide-content">
+                <p style="text-align: center; font-size: 1.3rem; margin-bottom: 40px;">
+                    <strong>Objective:</strong> Physically-based fire simulation with real-time performance
+                </p>
+                
+                <div style="margin-bottom: 40px;">
+                    <h3 style="color: #ffcc00; margin-bottom: 20px;">Key Features</h3>
+                    <ul style="font-size: 1.1rem;">
+                        <li>3D Navier-Stokes fluid dynamics</li>
+                        <li>Volume rendering with blackbody radiation</li>
+                        <li>GPU acceleration via Taichi</li>
+                        <li>Interactive visualization with real-time controls</li>
+                    </ul>
+                </div>
+                
+                <div class="team-intro">
+                    <div class="team-member-card">
+                        <h4 style="color: #ff6b35;">Chenyang Zhang</h4>
+                        <p>Pressure Solver & Algorithms</p>
+                    </div>
+                    <div class="team-member-card">
+                        <h4 style="color: #ff6b35;">Huachen Qu</h4>
+                        <p>Volume Renderer & Blackbody</p>
+                    </div>
+                    <div class="team-member-card">
+                        <h4 style="color: #ff6b35;">Muze Du</h4>
+                        <p>Fluid3D & Post-Processing</p>
+                    </div>
+                    <div class="team-member-card">
+                        <h4 style="color: #ff6b35;">Yijun Xiang</h4>
+                        <p>System Architecture & GPU</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p style="color: #999; margin-top: 20px;">Real-time 3D Fire Simulation - CS 184 Summer 2025</p>
-        <div class="team">
-            <div class="team-member">Chenyang Zhang</div>
-            <div class="team-member">Huachen Qu</div>
-            <div class="team-member">Muze Du</div>
-            <div class="team-member">Yijun Xiang</div>
+
+        <!-- Slide 2: Technical Implementation -->
+        <div class="slide">
+            <div class="slide-number">2 / 3</div>
+            <div class="slide-header">
+                <h1 class="slide-title">System Architecture & Current Progress</h1>
+            </div>
+            <div class="slide-content">
+                <h3 style="color: #ffcc00; text-align: center; margin-bottom: 30px;">Pipeline Overview</h3>
+                
+                <div class="pipeline-diagram">
+                    <div class="pipeline-step">
+                        <h4 style="color: #ff6b35;">Fluid Grid</h4>
+                        <p>96³ voxels (High)</p>
+                    </div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">
+                        <h4 style="color: #ff6b35;">Simulation</h4>
+                        <p>Semi-Lagrangian<br>Jacobi Solver<br>Buoyancy</p>
+                    </div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">
+                        <h4 style="color: #ff6b35;">Rendering</h4>
+                        <p>256-step Ray March<br>800-3000K LUT</p>
+                    </div>
+                    <span class="pipeline-arrow">→</span>
+                    <div class="pipeline-step">
+                        <h4 style="color: #ff6b35;">Post-FX</h4>
+                        <p>Bloom<br>Heat Refraction<br>Tone Mapping</p>
+                    </div>
+                </div>
+
+                <h3 style="color: #ffcc00; text-align: center; margin: 40px 0 20px;">Performance Metrics</h3>
+                
+                <table class="performance-table">
+                    <tr>
+                        <th>Quality Level</th>
+                        <th>Grid Size</th>
+                        <th>Ray Steps</th>
+                        <th>Performance</th>
+                    </tr>
+                    <tr>
+                        <td>Low</td>
+                        <td>64³</td>
+                        <td>128</td>
+                        <td class="highlight">120+ FPS</td>
+                    </tr>
+                    <tr>
+                        <td>Medium</td>
+                        <td>80³</td>
+                        <td>192</td>
+                        <td class="highlight">60+ FPS</td>
+                    </tr>
+                    <tr>
+                        <td>High</td>
+                        <td>96³</td>
+                        <td>256</td>
+                        <td class="highlight">30+ FPS</td>
+                    </tr>
+                    <tr>
+                        <td>Ultra</td>
+                        <td>128³</td>
+                        <td>384</td>
+                        <td class="highlight">15+ FPS</td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="#abstract">Abstract</a></li>
-            <li><a href="#approach">Technical Approach</a></li>
-            <li><a href="#results">Results</a></li>
-            <li><a href="#contributions">Contributions</a></li>
-            <li><a href="#references">References</a></li>
-        </ul>
-    </nav>
-
-    <main class="container">
-        <section id="abstract">
-            <h2>Abstract</h2>
-            <div class="abstract-card">
-                <p>
-                    We present <strong>Ignis Divinus</strong>, a real-time 3D fire simulation system that achieves physically realistic flame behavior through GPU-accelerated fluid dynamics. Our implementation combines stable Navier-Stokes fluid simulation with volumetric rendering techniques, leveraging Taichi's differentiable programming framework for high-performance computation. The system features a Semi-Lagrangian advection scheme for stability, temperature-driven buoyancy for natural flame motion, and physically-based blackbody radiation for accurate color representation. We achieved interactive frame rates of 30+ FPS at high quality settings (96³ grid resolution) on consumer GPUs, with advanced post-processing effects including bloom and heat refraction. Our approach demonstrates that complex fluid phenomena can be simulated in real-time while maintaining visual fidelity suitable for interactive applications, games, and visual effects.
-                </p>
+        <!-- Slide 3: Achievements & Next Steps -->
+        <div class="slide">
+            <div class="slide-number">3 / 3</div>
+            <div class="slide-header">
+                <h1 class="slide-title">Current Status & Future Work</h1>
             </div>
-        </section>
-
-        <section id="approach">
-            <h2>Technical Approach</h2>
-            
-            <div class="card">
-                <h3>Core Simulation Architecture</h3>
-                <p>
-                    Our fire simulation system is built on a 3D grid-based fluid solver implementing the incompressible Navier-Stokes equations. We chose a Semi-Lagrangian advection scheme for its unconditional stability, allowing larger time steps without numerical explosion. The simulation operates on a staggered MAC (Marker-And-Cell) grid where velocity components are stored at cell faces and scalar quantities (density, temperature) at cell centers.
-                </p>
+            <div class="slide-content">
+                <h3 style="color: #4CAF50; margin-bottom: 30px;">Completed ✓</h3>
                 
-                <h4>Key Technical Decisions:</h4>
-                <ul>
-                    <li><strong>Grid Resolution:</strong> 96³ voxels as optimal balance between detail and performance</li>
-                    <li><strong>Time Integration:</strong> Adaptive time stepping with CFL condition monitoring</li>
-                    <li><strong>Pressure Solver:</strong> Jacobi iteration (40 iterations) for incompressibility enforcement</li>
-                    <li><strong>Boundary Conditions:</strong> No-slip at bottom for ground interaction, open boundaries at top for natural outflow</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>Rendering Pipeline</h3>
-                <p>
-                    We implemented a ray marching-based volume renderer that directly integrates emission and absorption along view rays. The renderer uses physically-based blackbody radiation to map temperature values to colors, creating realistic flame appearance from deep red through orange to bright yellow-white.
-                </p>
-                
-                <div class="technique-comparison">
-                    <div class="technique-box before">
-                        <h4>Initial Approach</h4>
-                        <ul>
-                            <li>Fixed step ray marching</li>
-                            <li>Linear color interpolation</li>
-                            <li>Simple alpha blending</li>
-                            <li>No post-processing</li>
-                        </ul>
+                <div class="achievements-list">
+                    <div class="achievement-item">
+                        <span class="achievement-icon">✓</span>
+                        <div>
+                            <strong>Stable 3D fluid solver</strong> with Semi-Lagrangian advection
+                        </div>
                     </div>
-                    <div class="technique-box after">
-                        <h4>Final Implementation</h4>
-                        <ul>
-                            <li>Adaptive step size with early termination</li>
-                            <li>Blackbody radiation LUT (800K-3000K)</li>
-                            <li>Emission-absorption model</li>
-                            <li>Bloom + heat refraction effects</li>
-                        </ul>
+                    <div class="achievement-item">
+                        <span class="achievement-icon">✓</span>
+                        <div>
+                            <strong>Realistic flame colors</strong> via blackbody radiation (800K-3000K)
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <span class="achievement-icon">✓</span>
+                        <div>
+                            <strong>Heat refraction</strong> and post-processing effects
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <span class="achievement-icon">✓</span>
+                        <div>
+                            <strong>Performance monitoring</strong> and optimization system
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #ff6b35; margin: 40px 0 30px;">In Progress 🔄</h3>
+                
+                <div class="next-steps-grid">
+                    <div class="next-step-card">
+                        <h4 style="color: #ffcc00;">Turbulence</h4>
+                        <p>Vorticity confinement for enhanced detail</p>
+                    </div>
+                    <div class="next-step-card">
+                        <h4 style="color: #ffcc00;">Particles</h4>
+                        <p>Smoke system and sparks integration</p>
+                    </div>
+                    <div class="next-step-card">
+                        <h4 style="color: #ffcc00;">Optimization</h4>
+                        <p>Adaptive resolution techniques</p>
+                    </div>
+                </div>
+
+                <div class="demo-screenshots">
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/400x300/000000/ff6b35?text=3D+Flame" alt="3D Flame">
+                        <div class="screenshot-caption">Volumetric Flame Rendering</div>
+                    </div>
+                    <div class="screenshot">
+                        <img src="https://via.placeholder.com/400x300/000000/ffcc00?text=Heat+Effects" alt="Heat Effects">
+                        <div class="screenshot-caption">Heat Refraction & Bloom</div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="card">
-                <h3>Performance Optimizations</h3>
-                <p>
-                    Achieving real-time performance required careful optimization at multiple levels:
-                </p>
-                
-                <h4>GPU Acceleration with Taichi</h4>
-                <ul>
-                    <li><strong>Kernel Fusion:</strong> Combined multiple computation passes to reduce memory bandwidth</li>
-                    <li><strong>Shared Memory:</strong> Utilized tile-based computation for cache efficiency</li>
-                    <li><strong>Vectorization:</strong> Leveraged SIMD instructions through Taichi's automatic optimization</li>
-                </ul>
-                
-                <h4>Algorithmic Improvements</h4>
-                <ul>
-                    <li><strong>Early Ray Termination:</strong> Stop marching when accumulated opacity exceeds threshold</li>
-                    <li><strong>Level of Detail:</strong> Reduce simulation resolution for distant views</li>
-                    <li><strong>Temporal Filtering:</strong> Smooth heat refraction over multiple frames</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>Challenges & Solutions</h3>
-                
-                <h4>Problem 1: Numerical Instability</h4>
-                <p><strong>Issue:</strong> Initial implementation suffered from velocity field explosion at high temperatures.</p>
-                <p><strong>Solution:</strong> Implemented Semi-Lagrangian advection with CFL-based adaptive time stepping and added numerical dissipation to damp high-frequency noise.</p>
-                
-                <h4>Problem 2: Unrealistic Flame Motion</h4>
-                <p><strong>Issue:</strong> Flames appeared too laminar and lacked turbulent detail.</p>
-                <p><strong>Solution:</strong> Added vorticity confinement to restore small-scale rotational motion lost to numerical dissipation, and introduced stochastic fuel injection for natural flickering.</p>
-                
-                <h4>Problem 3: Performance Bottlenecks</h4>
-                <p><strong>Issue:</strong> Initial ray marcher achieved only 5-10 FPS at target resolution.</p>
-                <p><strong>Solution:</strong> Implemented adaptive step sizes, early termination, and moved all computation to GPU kernels, achieving 6x performance improvement.</p>
-            </div>
-
-            <div class="card">
-                <h3>Lessons Learned</h3>
-                <ul>
-                    <li><strong>Stability vs Accuracy Trade-off:</strong> Semi-Lagrangian methods sacrifice some accuracy for unconditional stability, but this is acceptable for visual applications where stability is paramount.</li>
-                    <li><strong>Importance of Physical Models:</strong> Using blackbody radiation for color mapping made a dramatic difference in realism compared to ad-hoc color gradients.</li>
-                    <li><strong>GPU Memory Patterns Matter:</strong> Coalesced memory access patterns provided 2-3x speedup over naive implementations.</li>
-                    <li><strong>Post-processing Impact:</strong> Simple effects like bloom and heat refraction contribute disproportionately to perceived quality.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="results">
-            <h2>Results</h2>
-            
-            <div style="text-align: center; margin: 40px auto;">
-                <h3 style="font-size: 2.5rem; margin-bottom: 20px; background: linear-gradient(90deg, #8A2BE2, #FF6B35, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-transform: uppercase; letter-spacing: 2px;">
-                    🔥 Arcane Blast
-                </h3>
-                <div style="max-width: 600px; height: 450px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <div style="width: 450px; height: 600px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                        <img src="assets/small-blast.gif" alt="Arcane Blast Fire Simulation" style="width: 600px; height: 450px; border-radius: 15px; box-shadow: 0 20px 60px rgba(138, 43, 226, 0.4); transform: rotate(-90deg); object-fit: cover;">
-                    </div>
-                </div>
-                <p style="margin-top: 30px; color: #bbb; font-size: 1.1rem;">
-                    Artistic creation showcasing the expressive potential of our fire simulation
-                </p>
-                <p style="margin-top: 10px; color: #999;">
-                    See the video below for technical demonstrations and feature breakdowns
-                </p>
-            </div>
-            
-            <h3 style="margin-top: 60px;">Detailed Feature Demonstration</h3>
-            <div class="video-container">
-                <iframe src="https://drive.google.com/file/d/1DYp5ZlH3U0DpFxJQEXef2onEMBGBQo66/preview" allowfullscreen></iframe>
-            </div>
-            <p style="text-align: center; color: #999; margin: 20px 0 40px;">
-                Full demonstration showcasing wind effects, color variations, explosion dynamics, and real-time parameter controls
-            </p>
-            
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-value">96³</div>
-                    <div class="metric-label">Grid Resolution</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">30-60</div>
-                    <div class="metric-label">FPS Range</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">256</div>
-                    <div class="metric-label">Ray Steps (Max)</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">800-3000K</div>
-                    <div class="metric-label">Temperature Range</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">40</div>
-                    <div class="metric-label">Jacobi Iterations</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">6x</div>
-                    <div class="metric-label">Performance Gain</div>
-                </div>
-            </div>
-
-            <h3>Performance Analysis</h3>
-            <div class="card">
-                <h4>Frame Time Breakdown (High Quality, 96³ grid)</h4>
-                <ul>
-                    <li><strong>Fluid Simulation:</strong> 12ms (40%)</li>
-                    <li><strong>Volume Rendering:</strong> 15ms (50%)</li>
-                    <li><strong>Post-processing:</strong> 2ms (7%)</li>
-                    <li><strong>UI & Other:</strong> 1ms (3%)</li>
-                    <li><strong>Total Frame Time:</strong> ~30ms (33 FPS)</li>
-                </ul>
-                
-                <h4>Quality Presets Performance</h4>
-                <ul>
-                    <li><strong>Low (64³ grid, 128 ray steps):</strong> 120+ FPS</li>
-                    <li><strong>Medium (80³ grid, 192 ray steps):</strong> 60+ FPS</li>
-                    <li><strong>High (96³ grid, 256 ray steps):</strong> 30+ FPS</li>
-                    <li><strong>Ultra (128³ grid, 384 ray steps):</strong> 15+ FPS</li>
-                </ul>
-            </div>
-
-            <h3>Comparison with Reference</h3>
-            <div class="card">
-                <p>
-                    Our implementation achieves comparable visual quality to offline renderers while maintaining real-time performance. The key differences from production systems:
-                </p>
-                <ul>
-                    <li><strong>Grid Resolution:</strong> Limited to 128³ for real-time vs 512³+ in offline systems</li>
-                    <li><strong>Lighting Model:</strong> Emission-only vs full global illumination</li>
-                    <li><strong>Smoke Integration:</strong> Simplified density model vs separate smoke solver</li>
-                    <li><strong>Combustion Model:</strong> Temperature-based vs chemical reaction simulation</li>
-                </ul>
-                <p>
-                    Despite these simplifications, our system produces visually convincing results suitable for games, interactive visualizations, and rapid prototyping of fire effects.
-                </p>
-            </div>
-        </section>
-
-        <section id="contributions">
-            <h2>Team Contributions</h2>
-            
-            <div class="contributions-section">
-                <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
-                    Each team member contributed equally to the project's success through specialized roles:
-                </p>
-                
-                <div class="member-contribution">
-                    <div class="member-name">Chenyang Zhang</div>
-                    <div class="contribution-list">
-                        <span class="contribution-tag">Velocity-Pressure Solver</span>
-                        <span class="contribution-tag">Buoyancy Forces</span>
-                        <span class="contribution-tag">Boundary Conditions</span>
-                        <span class="contribution-tag">Algorithm Research</span>
-                        <span class="contribution-tag">Numerical Stability</span>
-                    </div>
-                    <p>Developed Jacobi pressure solver with 80 iterations for incompressible flow. Implemented buoyancy-driven motion using temperature gradients. Designed boundary condition handling for stable simulation. Conducted extensive research on fluid dynamics algorithms.</p>
-                </div>
-                
-                <div class="member-contribution">
-                    <div class="member-name">Huachen Qu</div>
-                    <div class="contribution-list">
-                        <span class="contribution-tag">VolumeRenderer Class</span>
-                        <span class="contribution-tag">Blackbody LUT System</span>
-                        <span class="contribution-tag">Ray Marching Algorithm</span>
-                        <span class="contribution-tag">Emission-Absorption Model</span>
-                        <span class="contribution-tag">Flame Color Control</span>
-                    </div>
-                    <p>Built VolumeRenderer with 256-step ray marching and blackbody radiation LUT (800-3000K). Implemented emission scale and absorption coefficients for volumetric effects. Added dynamic flame tinting system for color variations during runtime.</p>
-                </div>
-                
-                <div class="member-contribution">
-                    <div class="member-name">Muze Du</div>
-                    <div class="contribution-list">
-                        <span class="contribution-tag">Fluid3D Implementation</span>
-                        <span class="contribution-tag">Fuel Combustion System</span>
-                        <span class="contribution-tag">HeatRefraction Effects</span>
-                        <span class="contribution-tag">PostProcessor Pipeline</span>
-                        <span class="contribution-tag">Dissipation Modeling</span>
-                    </div>
-                    <p>Co-implemented Fluid3D class with velocity, density, and temperature fields. Developed fuel combustion timing and dissipation rates. Created HeatRefraction with screen-space distortion. Built PostProcessor with bloom and temporal filtering for visual enhancement.</p>
-                </div>
-                
-                <div class="member-contribution">
-                    <div class="member-name">Yijun Xiang</div>
-                    <div class="contribution-list">
-                        <span class="contribution-tag">Main System Architecture</span>
-                        <span class="contribution-tag">Taichi GPU Framework</span>
-                        <span class="contribution-tag">Performance Optimization</span>
-                        <span class="contribution-tag">Adaptive Timestep Control</span>
-                        <span class="contribution-tag">Project Integration</span>
-                    </div>
-                    <p>Designed main.py architecture integrating all subsystems. Led Taichi GPU framework implementation achieving 30+ FPS at 96³ resolution. Developed adaptive timestep control and performance monitoring system. Coordinated module integration and project structure.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="slides">
-            <h2>Presentation</h2>
-            <div class="card" style="text-align: center;">
-                <h3 style="margin-bottom: 20px;">Project Slides</h3>
-                <p style="margin-bottom: 20px;">Technical overview and implementation details</p>
-                <a href="slides.html" style="display: inline-block; padding: 12px 25px; background: var(--fire-yellow); color: #000; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; margin: 10px;"
-                   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 30px rgba(255, 204, 0, 0.5)';"
-                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                    View Presentation Slides
-                </a>
-            </div>
-        </section>
-
-        <section id="references">
-            <h2>References</h2>
-            
-            <div class="references">
-                <div class="reference-item">
-                    [1] Stam, Jos. "Stable Fluids." SIGGRAPH 1999.
-                    <a href="https://www.dgp.toronto.edu/public_user/stam/reality/Research/pdf/ns.pdf" target="_blank">PDF</a>
-                </div>
-                
-                <div class="reference-item">
-                    [2] Fedkiw, Ronald, Jos Stam, and Henrik Wann Jensen. "Visual Simulation of Smoke." SIGGRAPH 2001.
-                    <a href="https://web.stanford.edu/class/cs237d/smoke.pdf" target="_blank">Paper</a>
-                </div>
-                
-                <div class="reference-item">
-                    [3] Nguyen, Duc Quang, Ronald Fedkiw, and Henrik Wann Jensen. "Physically Based Modeling and Animation of Fire." SIGGRAPH 2002.
-                    <a href="https://physbam.stanford.edu/~fedkiw/papers/stanford2002-01.pdf" target="_blank">Paper</a>
-                </div>
-                
-                <div class="reference-item">
-                    [4] Bridson, Robert. "Fluid Simulation for Computer Graphics." CRC Press, 2015.
-                    <a href="https://www.cs.ubc.ca/~rbridson/fluidsimulation/" target="_blank">Book Website</a>
-                </div>
-                
-                <div class="reference-item">
-                    [5] Wrenninge, Magnus and Nafees Bin Zafar. "Volumetric Methods in Visual Effects." SIGGRAPH 2010 Course.
-                    <a href="https://dl.acm.org/doi/10.1145/1837101.1837132" target="_blank">ACM Digital Library</a>
-                </div>
-                
-                <div class="reference-item">
-                    [6] Taichi Programming Language Documentation.
-                    <a href="https://docs.taichi-lang.org/" target="_blank">Documentation</a>
-                </div>
-                
-                <div class="reference-item">
-                    [7] Crane, Keenan, et al. "Real-Time Simulation and Rendering of 3D Fluids." GPU Gems 3, 2007.
-                    <a href="https://developer.nvidia.com/gpugems/gpugems3/part-v-physics-simulation/chapter-30-real-time-simulation-and-rendering-3d-fluids" target="_blank">Chapter</a>
-                </div>
-                
-                <div class="reference-item">
-                    [8] Foster, Nick and Dimitri Metaxas. "Realistic Animation of Liquids." Graphical Models and Image Processing, 1996.
-                    <a href="https://www.cs.unc.edu/~lin/COMP768-F07/LEC/fosternick96.pdf" target="_blank">PDF</a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>CS 184: Computer Graphics and Imaging | Summer 2025 | UC Berkeley</p>
-        <p style="margin-top: 15px; font-size: 1.1rem;">
-            <strong>Ignis Divinus</strong> - Real-time 3D Fire Simulation
-        </p>
-        <p style="margin-top: 20px;">
-            <a href="index.html" style="color: var(--fire-orange); text-decoration: none; margin: 0 15px;">Home</a>
-            <a href="proposal.html" style="color: var(--fire-orange); text-decoration: none; margin: 0 15px;">Proposal</a>
-            <a href="milestone.html" style="color: var(--fire-orange); text-decoration: none; margin: 0 15px;">Milestone</a>
-            <a href="slides.html" style="color: var(--fire-orange); text-decoration: none; margin: 0 15px;">Slides</a>
-        </p>
-    </footer>
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
 
     <script>
-        // Particle animation
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
             
-            const size = Math.random() * 30 + 10;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            particle.style.animationDelay = Math.random() * 2 + 's';
+            currentSlide = (n + totalSlides) % totalSlides;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
             
-            document.getElementById('particles').appendChild(particle);
+            slides[currentSlide].classList.add('active');
             
-            setTimeout(() => {
-                particle.remove();
-            }, 5000);
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
         }
 
-        setInterval(createParticle, 200);
-
-        // Intersection observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.card, .result-item, .metric-card, .member-contribution').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Animate metric values
-        function animateValue(element, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const value = Math.floor(progress * (end - start) + start);
-                element.textContent = value + (element.dataset.suffix || '');
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
         }
 
-        const metricObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.animated) {
-                    entry.target.animated = true;
-                    const text = entry.target.textContent;
-                    const match = text.match(/\d+/);
-                    if (match) {
-                        const value = parseInt(match[0]);
-                        const suffix = text.replace(/\d+/, '');
-                        entry.target.dataset.suffix = suffix;
-                        animateValue(entry.target, 0, value, 1000);
-                    }
-                }
-            });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
         });
 
-        document.querySelectorAll('.metric-value').forEach(el => {
-            metricObserver.observe(el);
-        });
-
-        // Active nav highlighting
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.style.color = '';
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.style.color = 'var(--fire-orange)';
-                }
-            });
-        });
+        showSlide(0);
     </script>
 </body>
 </html>
